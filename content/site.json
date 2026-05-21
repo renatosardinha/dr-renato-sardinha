@@ -1,0 +1,241 @@
+{
+  "meta": {
+    "title": "Dr. Renato Sardinha — Medicina com evidência. Cuidado com presença.",
+    "description": "Acompanhamento médico integrativo baseado em evidência. Nutrologia esportiva, saúde mental e cuidado individualizado em São José do Rio Preto, SP.",
+    "siteUrl": "https://drrenatosardinha.com.br",
+    "ogImage": "/images/og.jpg",
+    "locale": "pt_BR",
+    "themeColor": "#F5F1EA"
+  },
+
+  "brand": {
+    "name": "Dr. Renato Sardinha",
+    "shortName": "RS",
+    "tagline": "Medicina com evidência. Cuidado com presença.",
+    "logo": "/images/logo.svg",
+    "logoMark": "/images/logo-mark.svg"
+  },
+
+  "contact": {
+    "whatsapp": "+55 17 99767-2746",
+    "whatsappLink": "https://wa.me/5517997672746?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta.",
+    "instagram": "@drrenatosardinha",
+    "instagramLink": "https://instagram.com/drrenatosardinha",
+    "email": "contato@drrenatosardinha.com.br",
+    "city": "São José do Rio Preto",
+    "state": "SP",
+    "country": "Brasil",
+    "address": "Atendimento presencial e online"
+  },
+
+  "nav": [
+    { "label": "Filosofia", "href": "#sobre" },
+    { "label": "Acompanhamento", "href": "#acompanhamento" },
+    { "label": "Para quem", "href": "#para-quem" },
+    { "label": "Depoimentos", "href": "#depoimentos" },
+    { "label": "Perguntas", "href": "#faq" },
+    { "label": "Agendar", "href": "#contato" }
+  ],
+
+  "hero": {
+    "eyebrow": "Medicina integrativa baseada em evidência",
+    "headline": "Saúde com evidência.\nCuidado com presença.",
+    "subheadline": "Acompanhamento médico que considera o paciente por inteiro — não em fragmentos. Critério científico, escuta atenta e decisões clínicas construídas com você.",
+    "primaryCta": { "label": "Agendar pelo WhatsApp", "href": "https://wa.me/5517997672746" },
+    "secondaryCta": { "label": "Conhecer o acompanhamento", "href": "#acompanhamento" },
+    "image": "/images/portrait.jpg",
+    "imageAlt": "Dr. Renato Sardinha"
+  },
+
+  "about": {
+    "eyebrow": "Filosofia clínica",
+    "title": "Cuidar é um ato de critério.",
+    "lead": "Acredito em uma medicina que respeita a complexidade de quem chega ao consultório. Não há protocolo universal — há pessoa, contexto e tempo.",
+    "paragraphs": [
+      "Sou médico formado pela UNIUBE, com pós-graduação em Nutrologia Esportiva e formação em curso em Psiquiatria e Prática Baseada em Evidência. Meu trabalho se constrói no encontro entre ciência rigorosa e cuidado próximo.",
+      "Conduzo um consultório integrativo, no qual nutrição, atividade física, sono, saúde mental e farmacologia são pensados como peças de um mesmo desenho — não como especialidades isoladas. Cada decisão clínica é discutida abertamente, com riscos, benefícios e alternativas postos à mesa.",
+      "Recuso promessas. Trabalho com critério, leitura crítica da literatura e individualização real. O que ofereço é presença clínica — e a disciplina de quem trata cada paciente como caso único."
+    ],
+    "credentials": [
+      { "label": "Formação",     "value": "Medicina · UNIUBE (2018)" },
+      { "label": "Pós",          "value": "Nutrologia Esportiva · BWS" },
+      { "label": "Em curso",     "value": "Psiquiatria · Prática Baseada em Evidência" },
+      { "label": "Atendimento",  "value": "São José do Rio Preto, SP · Online" }
+    ],
+    "image": "/images/about.jpg",
+    "imageAlt": "Consultório do Dr. Renato Sardinha"
+  },
+
+  "process": {
+    "eyebrow": "Como funciona",
+    "title": "Um acompanhamento construído em camadas.",
+    "lead": "Cada etapa existe por uma razão clínica — e respeita o tempo de quem está sendo cuidado.",
+    "steps": [
+      {
+        "n": "01",
+        "title": "Primeira consulta",
+        "body": "Encontro extenso de escuta e avaliação clínica. Histórico, queixas, contexto de vida, exames prévios. É o momento em que o caso é desenhado — sem pressa."
+      },
+      {
+        "n": "02",
+        "title": "Plano individualizado",
+        "body": "Construo, junto com você, um plano que pode envolver nutrição, atividade física, sono, suporte farmacológico e saúde mental. Sempre com pros, contras e alternativas explicados com clareza."
+      },
+      {
+        "n": "03",
+        "title": "Acompanhamento contínuo",
+        "body": "Retornos programados, ajustes finos e canal direto para dúvidas relevantes. Acompanhamento não é uma sequência de consultas — é uma relação clínica sustentada no tempo."
+      },
+      {
+        "n": "04",
+        "title": "Decisões compartilhadas",
+        "body": "Cada conduta é discutida abertamente. Você sai do consultório entendendo o porquê de cada escolha — e com autonomia para participar dela."
+      }
+    ],
+    "modalities": [
+      { "label": "Presencial", "value": "São José do Rio Preto, SP" },
+      { "label": "Online",     "value": "Telemedicina segura · Brasil" }
+    ]
+  },
+
+  "audience": {
+    "eyebrow": "Para quem é",
+    "title": "Para quem busca cuidado com critério.",
+    "lead": "Este acompanhamento foi pensado para pessoas que valorizam tempo, escuta e ciência — e que recusam atalhos.",
+    "items": [
+      {
+        "title": "Quem deseja uma visão integrada",
+        "body": "Pessoas cansadas de pareceres fragmentados, que querem um médico que pense o conjunto — corpo, mente, rotina e contexto."
+      },
+      {
+        "title": "Quem prioriza evidência",
+        "body": "Pacientes que querem entender o que está sendo proposto, ler a literatura junto, discutir riscos e benefícios com transparência."
+      },
+      {
+        "title": "Quem busca performance com responsabilidade",
+        "body": "Atletas, profissionais exigentes e pessoas ativas que querem otimizar saúde sem comprometer segurança ou ética clínica."
+      },
+      {
+        "title": "Quem precisa de suporte em saúde mental",
+        "body": "Pacientes com demandas em ansiedade, humor, sono e sofrimento contemporâneo — com cuidado farmacológico criterioso e encaminhamento psicoterápico quando indicado."
+      }
+    ]
+  },
+
+  "differentials": {
+    "eyebrow": "O que distingue",
+    "title": "Critério antes de conduta.",
+    "items": [
+      { "title": "Medicina baseada em evidência",   "body": "Cada decisão clínica é fundamentada na melhor literatura disponível — não em modismos." },
+      { "title": "Individualização real",            "body": "Plano construído para o seu caso. Não há receita pronta, não há protocolo de vitrine." },
+      { "title": "Acompanhamento próximo",           "body": "Canal aberto para dúvidas relevantes e revisões frequentes — clínica é relação no tempo." },
+      { "title": "Pensamento crítico",               "body": "Discuto abertamente o que funciona, o que ainda é incerto e o que prefiro evitar — com transparência." },
+      { "title": "Cuidado integrativo",              "body": "Nutrição, movimento, sono, saúde mental e farmacologia pensados como um desenho único." },
+      { "title": "Ética clínica",                    "body": "Sem promessas, sem milagres, sem venda de protocolos. Saúde não comporta atalhos." }
+    ]
+  },
+
+  "testimonials": {
+    "eyebrow": "Em primeira pessoa",
+    "title": "O que dizem pacientes que confiaram no processo.",
+    "items": [
+      {
+        "quote": "Pela primeira vez senti que um médico olhou para o todo. Saí com clareza, não com uma receita.",
+        "author": "M. R.",
+        "role": "Paciente desde 2023"
+      },
+      {
+        "quote": "A condução criteriosa do Dr. Renato me devolveu confiança no acompanhamento médico. Ciência e escuta caminham juntas no consultório.",
+        "author": "C. L.",
+        "role": "Paciente"
+      },
+      {
+        "quote": "O que mais valorizo é a honestidade. Ele explica o que sabe, o que não sabe e o que ainda está sendo estudado. É raro.",
+        "author": "A. P.",
+        "role": "Paciente"
+      },
+      {
+        "quote": "Acompanhamento que respeita o tempo do corpo. Sem promessas, com método.",
+        "author": "J. S.",
+        "role": "Paciente"
+      }
+    ]
+  },
+
+  "faq": {
+    "eyebrow": "Perguntas frequentes",
+    "title": "Antes de agendar.",
+    "items": [
+      {
+        "q": "Como funciona a primeira consulta?",
+        "a": "É um encontro extenso — em média entre 60 e 90 minutos — voltado a entender você por inteiro: histórico, queixas, exames prévios, rotina, contexto. Saímos com um plano inicial e os próximos passos definidos."
+      },
+      {
+        "q": "Qual a duração do acompanhamento?",
+        "a": "Depende do caso. Alguns acompanhamentos são pontuais; outros se estendem por meses ou anos. Conversamos abertamente sobre o que faz sentido clinicamente para você."
+      },
+      {
+        "q": "Com que frequência ocorrem os retornos?",
+        "a": "Tipicamente entre 30 e 90 dias, ajustando conforme a fase do tratamento. Há também um canal para dúvidas pontuais relevantes entre as consultas."
+      },
+      {
+        "q": "Atende online ou apenas presencial?",
+        "a": "Ambos. O consultório fica em São José do Rio Preto, SP. As consultas online são realizadas por plataforma segura de telemedicina, com a mesma profundidade do atendimento presencial."
+      },
+      {
+        "q": "Trabalha com convênios?",
+        "a": "O atendimento é particular. Forneço recibo médico para reembolso junto ao seu plano de saúde, quando aplicável."
+      },
+      {
+        "q": "Como funcionam os pagamentos?",
+        "a": "Pagamento via Pix, cartão ou transferência. As condições são esclarecidas com transparência no agendamento."
+      },
+      {
+        "q": "Como agendar?",
+        "a": "O canal direto é o WhatsApp. A secretaria responde em horário comercial e organiza o melhor horário disponível para o seu caso."
+      }
+    ]
+  },
+
+  "cta": {
+    "eyebrow": "Próximo passo",
+    "title": "Se faz sentido para você,\nfaz sentido conversarmos.",
+    "lead": "O agendamento é direto, pelo WhatsApp. A secretaria responde em horário comercial.",
+    "primary": { "label": "Agendar pelo WhatsApp", "href": "https://wa.me/5517997672746" },
+    "secondary": { "label": "Conhecer o Instagram", "href": "https://instagram.com/drrenatosardinha" }
+  },
+
+  "footer": {
+    "tagline": "Medicina com evidência. Cuidado com presença.",
+    "columns": [
+      {
+        "title": "Navegação",
+        "links": [
+          { "label": "Filosofia",        "href": "#sobre" },
+          { "label": "Acompanhamento",   "href": "#acompanhamento" },
+          { "label": "Para quem",        "href": "#para-quem" },
+          { "label": "Depoimentos",      "href": "#depoimentos" },
+          { "label": "Perguntas",        "href": "#faq" }
+        ]
+      },
+      {
+        "title": "Contato",
+        "links": [
+          { "label": "WhatsApp",  "href": "https://wa.me/5517997672746" },
+          { "label": "Instagram", "href": "https://instagram.com/drrenatosardinha" },
+          { "label": "E-mail",    "href": "mailto:contato@drrenatosardinha.com.br" }
+        ]
+      },
+      {
+        "title": "Institucional",
+        "links": [
+          { "label": "Política de privacidade", "href": "/privacidade" },
+          { "label": "LGPD",                    "href": "/lgpd" },
+          { "label": "Termos de uso",           "href": "/termos" }
+        ]
+      }
+    ],
+    "legal": "Dr. Renato Sardinha · CRM-SP em conformidade · São José do Rio Preto, SP",
+    "disclaimer": "As informações deste site têm caráter informativo e não substituem consulta médica presencial. Resultados em medicina são individuais e dependem de múltiplos fatores clínicos."
+  }
+}
