@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Reveal } from '@/components/Reveal';
 import { site } from '@/lib/content';
 
@@ -42,8 +43,21 @@ export function About() {
             </Reveal>
           </div>
 
-          {/* Coluna principal — parágrafos */}
+          {/* Coluna principal — imagem de ambiente + parágrafos */}
           <div className="md:col-span-7 md:pt-16">
+            {/* Ambiente — proporção 4:3, moldura fina consistente com o design system */}
+            <Reveal>
+              <div className="relative aspect-[4/3] w-full overflow-hidden border border-mist mb-12">
+                <Image
+                  src={about.image}
+                  alt={about.imageAlt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 60vw"
+                  className="object-cover"
+                />
+              </div>
+            </Reveal>
+
             {about.paragraphs.map((p, i) => (
               <Reveal key={i} delay={0.15 + i * 0.1}>
                 <p className="text-graphite text-lg md:text-xl leading-[1.7] mb-8 last:mb-0 max-w-prose">
@@ -52,11 +66,11 @@ export function About() {
               </Reveal>
             ))}
 
-            {/* Assinatura editorial */}
+            {/* Assinatura editorial — CRM numerado conforme Resolução CFM 2.336/2023 */}
             <Reveal delay={0.5}>
               <div className="mt-16 pt-8 border-t border-mist flex items-center justify-between">
                 <span className="font-display text-lg italic text-umber">— Dr. Renato Sardinha</span>
-                <span className="font-mono text-xs text-ash tracking-widest">CRM-SP</span>
+                <span className="font-mono text-xs text-ash tracking-widest">MÉDICO · CRM-SP 205323</span>
               </div>
             </Reveal>
           </div>

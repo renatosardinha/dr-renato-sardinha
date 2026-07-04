@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowRight, ArrowDown } from 'lucide-react';
 import { site } from '@/lib/content';
@@ -7,7 +8,7 @@ import { site } from '@/lib/content';
 export function Hero() {
   const { hero } = site;
 
-  // Cada palavra revelada em cascata — efeito editorial signature
+  // Cada linha revelada em cascata — efeito editorial signature
   const headlineLines = hero.headline.split('\n');
 
   return (
@@ -49,7 +50,7 @@ export function Hero() {
           ))}
         </h1>
 
-        {/* Subheadline + CTAs */}
+        {/* Subheadline + CTAs + Retrato/credenciais */}
         <div className="mt-16 md:mt-24 grid md:grid-cols-12 gap-10 md:gap-16">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -77,18 +78,33 @@ export function Hero() {
             </div>
           </motion.div>
 
-          {/* Painel direito — atributos editoriais */}
+          {/* Painel direito — retrato editorial + credenciais
+              Conformidade CFM 2.336/2023: pós-graduação lato sensu anunciada
+              como formação, sem uso do termo "Especialização" (reservado a RQE) */}
           <motion.aside
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.15, ease: [0.22, 1, 0.36, 1] }}
             className="md:col-span-5 lg:col-span-5 lg:col-start-8 border-t border-mist pt-8 md:border-t-0 md:border-l md:pt-0 md:pl-10"
           >
+            {/* Retrato — proporção 4:5, moldura fina consistente com o design system */}
+            <div className="relative aspect-[4/5] w-full overflow-hidden border border-mist mb-8">
+              <Image
+                src={hero.image}
+                alt={hero.imageAlt}
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 40vw"
+                className="object-cover"
+              />
+            </div>
+
             <dl className="grid grid-cols-1 gap-6">
               {[
-                ['Formação',     'Medicina · UNIUBE'],
-                ['Especialização','Nutrologia · Psiquiatria'],
-                ['Modalidade',   'Presencial · Online'],
+                ['Formação',            'Medicina · UNIUBE'],
+                ['Pós-graduação',       'Nutrologia Esportiva'],
+                ['Em curso',            'Psiquiatria · PBE'],
+                ['Modalidade',          'Presencial · Online'],
               ].map(([label, value]) => (
                 <div key={label} className="flex justify-between items-baseline gap-4 pb-4 border-b border-mist/60 last:border-0">
                   <dt className="eyebrow">{label}</dt>
