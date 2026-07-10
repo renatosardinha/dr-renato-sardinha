@@ -87,5 +87,6 @@ export interface SiteContent {
     columns: { title: string; links: Link[] }[];
     legal: string;
     disclaimer: string;
+    cnpj?: string;
   };
 }
