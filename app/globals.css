@@ -164,3 +164,43 @@
     scroll-behavior: auto !important;
   }
 }
+/* =========================================================
+   PROSE EDITORIAL — estilo do conteúdo de blog (Markdown → HTML)
+   ========================================================= */
+.prose-editorial {
+  color: var(--color-graphite);
+  font-size: 1.125rem;
+  line-height: 1.8;
+}
+.prose-editorial h2 {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.75rem;
+  color: var(--color-ink);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
+}
+.prose-editorial h3 {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.375rem;
+  color: var(--color-ink);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+.prose-editorial p { margin-bottom: 1.5rem; }
+.prose-editorial a {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-decoration-color: var(--color-clay);
+  text-decoration-thickness: 1px;
+}
+.prose-editorial blockquote {
+  border-left: 2px solid var(--color-terra);
+  padding-left: 1.5rem;
+  font-style: italic;
+  color: var(--color-umber);
+  margin: 2rem 0;
+}
+.prose-editorial ul, .prose-editorial ol { margin-bottom: 1.5rem; padding-left: 1.5rem; }
+.prose-editorial li { margin-bottom: 0.5rem; }
+.prose-editorial strong { color: var(--color-ink); font-weight: 500; }

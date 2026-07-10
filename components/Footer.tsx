@@ -54,6 +54,13 @@ export function Footer() {
             Construído com critério.
           </p>
         </div>
+
+        {/* Dados empresariais — discreto, exigência de transparência */}
+        {footer.cnpj && (
+          <p className="mt-4 font-mono text-[10px] tracking-wider text-ash/60">
+            {footer.cnpj}
+          </p>
+        )}
       </div>
     </footer>
   );
