@@ -48,7 +48,10 @@ export default async function PacienteHome() {
             Olá{paciente ? `, ${paciente.nome.split(' ')[0]}` : ''}
           </h1>
         </div>
-        <Sair />
+        <div className="flex flex-col items-end gap-2">
+          {admin && <a href="/paciente/admin" className="text-sm underline text-terracotta">Painel admin</a>}
+          <Sair />
+        </div>
       </header>
 
       <section className="mt-12">

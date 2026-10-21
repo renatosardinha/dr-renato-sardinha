@@ -34,6 +34,7 @@
     { "label": "Para quem", "href": "#para-quem" },
     { "label": "Depoimentos", "href": "#depoimentos" },
     { "label": "Perguntas", "href": "#faq" },
+    { "label": "Área do paciente", "href": "/paciente" },
     { "label": "Agendar", "href": "#contato" }
   ],
 

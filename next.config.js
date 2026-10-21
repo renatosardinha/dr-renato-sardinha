@@ -9,6 +9,7 @@ const nextConfig = {
   },
   experimental: {
     optimizePackageImports: ['framer-motion', 'lucide-react'],
+    serverActions: { bodySizeLimit: '4mb' },
   },
 };
 
