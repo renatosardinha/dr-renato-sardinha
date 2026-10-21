@@ -19,7 +19,7 @@ export default function LoginPage() {
     const supabase = createClient();
     const { error } = await supabase.auth.signInWithOtp({
       email: email.trim().toLowerCase(),
-      options: { shouldCreateUser: false }, // só quem a clínica cadastrou entra
+      options: { shouldCreateUser: true }, // o banco só libera e-mails cadastrados pela clínica
     });
     setCarregando(false);
     if (error) {

@@ -3,7 +3,6 @@
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { createClient } from '@/lib/supabase/server';
-import { createAdminClient } from '@/lib/supabase/admin';
 
 async function exigirAdmin() {
   const supabase = createClient();
@@ -24,13 +23,7 @@ export async function criarPaciente(formData: FormData) {
   const consentiu = formData.get('consentimento') === 'on';
   if (!nome || !email) voltar('erro', 'Informe nome e e-mail.');
 
-  // Cria o acesso de login (já confirmado) para o paciente poder receber o código.
-  const { error: authError } = await createAdminClient().auth.admin.createUser({
-    email, email_confirm: true,
-  });
-  if (authError && !/already|registered|exists/i.test(authError.message)) {
-    voltar('erro', 'Não foi possível criar o acesso: ' + authError.message);
-  }
+  // O acesso de login é criado automaticamente no 1º login (liberado pelo banco só para e-mails cadastrados).
 
   const { error } = await supabase.from('patients').insert({
     nome, email, celular, consentimento_em: consentiu ? new Date().toISOString() : null,
