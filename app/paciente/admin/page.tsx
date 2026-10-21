@@ -72,6 +72,8 @@ export default async function Admin({ searchParams }: { searchParams: { ok?: str
         <form action={publicarPost} className="mt-4 space-y-3">
           <div><label className={rotulo}>Título</label><input name="titulo" required className={campo} /></div>
           <div><label className={rotulo}>Texto</label><textarea name="corpo" rows={6} className={campo} /></div>
+          <div><label className={rotulo}>Imagem (opcional — JPG, PNG ou WebP, até 4 MB)</label>
+            <input name="imagem" type="file" accept="image/jpeg,image/png,image/webp" className="text-sm" /></div>
           <button className={botao}>Publicar</button>
         </form>
         {(posts ?? []).length > 0 && (

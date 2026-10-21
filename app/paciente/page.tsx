@@ -26,11 +26,19 @@ export default async function PacienteHome() {
   }
 
   const [{ data: posts }, { data: docs }] = await Promise.all([
-    supabase.from('posts').select('id, titulo, corpo, publicado_em').eq('publicado', true)
+    supabase.from('posts').select('id, titulo, corpo, midia_path, publicado_em').eq('publicado', true)
       .order('publicado_em', { ascending: false }).limit(30),
     supabase.from('documents').select('id, tipo, titulo, storage_path, data_documento')
       .order('created_at', { ascending: false }),
   ]);
+
+  const feed = await Promise.all(
+    (posts ?? []).map(async (p) => {
+      if (!p.midia_path) return { ...p, imagem: undefined as string | undefined };
+      const { data } = await supabase.storage.from('feed').createSignedUrl(p.midia_path, 3600);
+      return { ...p, imagem: data?.signedUrl };
+    })
+  );
 
   const links = await Promise.all(
     (docs ?? []).map(async (d) => {
@@ -76,12 +84,16 @@ export default async function PacienteHome() {
 
       <section className="mt-14">
         <h2 className="font-display text-xl">Novidades</h2>
-        {(posts ?? []).length === 0 ? (
+        {feed.length === 0 ? (
           <p className="mt-3 text-ash">Ainda não há publicações.</p>
         ) : (
           <div className="mt-4 space-y-6">
-            {posts!.map((p) => (
+            {feed.map((p) => (
               <article key={p.id} className="border border-mist bg-ivory p-5">
+                {p.imagem && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={p.imagem} alt="" className="mb-4 w-full" loading="lazy" />
+                )}
                 <h3 className="font-display text-lg">{p.titulo}</h3>
                 {p.corpo && <p className="mt-2 whitespace-pre-line text-graphite">{p.corpo}</p>}
               </article>
