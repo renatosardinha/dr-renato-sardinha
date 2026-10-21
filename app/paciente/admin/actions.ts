@@ -66,13 +66,28 @@ export async function enviarDocumento(formData: FormData) {
   voltar('ok', 'Documento enviado.');
 }
 
+const TIPOS_IMG = ['image/jpeg', 'image/png', 'image/webp'];
+
 export async function publicarPost(formData: FormData) {
   const supabase = await exigirAdmin();
   const titulo = String(formData.get('titulo') ?? '').trim();
   const corpo = String(formData.get('corpo') ?? '').trim() || null;
+  const imagem = formData.get('imagem');
   if (!titulo) voltar('erro', 'Informe o título.');
 
-  const { error } = await supabase.from('posts').insert({ titulo, corpo, publicado: true });
+  let midia_path: string | null = null;
+  if (imagem instanceof File && imagem.size > 0) {
+    if (!TIPOS_IMG.includes(imagem.type)) voltar('erro', 'Imagem deve ser JPG, PNG ou WebP.');
+    if (imagem.size > MAX_BYTES) voltar('erro', 'Imagem acima de 4 MB.');
+    midia_path = `posts/${Date.now()}-${imagem.name.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
+    const { error: upErr } = await supabase.storage.from('feed')
+      .upload(midia_path, imagem, { contentType: imagem.type });
+    if (upErr) voltar('erro', 'Falha ao enviar a imagem: ' + upErr.message);
+  }
+
+  const { error } = await supabase.from('posts').insert({
+    titulo, corpo, publicado: true, midia_path, tipo: midia_path ? 'imagem' : 'texto',
+  });
   if (error) voltar('erro', error.message);
 
   revalidatePath('/paciente');
@@ -82,6 +97,8 @@ export async function publicarPost(formData: FormData) {
 export async function removerPost(formData: FormData) {
   const supabase = await exigirAdmin();
   const id = String(formData.get('id') ?? '');
+  const { data: post } = await supabase.from('posts').select('midia_path').eq('id', id).maybeSingle();
+  if (post?.midia_path) await supabase.storage.from('feed').remove([post.midia_path]);
   await supabase.from('posts').delete().eq('id', id);
   revalidatePath('/paciente');
   voltar('ok', 'Post removido.');
