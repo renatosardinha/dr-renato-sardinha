@@ -64,7 +64,7 @@ export async function POST(req: Request) {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        'x-api-key': process.env.ANTHROPIC_API_KEY!,
+        'x-api-key': (process.env.ANTHROPIC_API_KEY ?? '').replace(/\s+/g, ''),
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
@@ -75,11 +75,12 @@ export async function POST(req: Request) {
         messages: [...historico, { role: 'user', content: mensagem }],
       }),
     });
-  } catch {
+  } catch (e) {
+    console.error('agente: falha ao chamar a API', e instanceof Error ? e.message : e);
     return NextResponse.json({ erro: 'Não consegui responder agora. Tente de novo ou fale com a clínica.' }, { status: 502 });
   }
   if (!resp.ok) {
-    console.error('agente: erro da API', resp.status);
+    console.error('agente: erro da API', resp.status, (await resp.text()).slice(0, 300));
     return NextResponse.json({ erro: 'Não consegui responder agora. Tente de novo ou fale com a clínica.' }, { status: 502 });
   }
 
