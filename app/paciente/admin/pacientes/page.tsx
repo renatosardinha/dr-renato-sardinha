@@ -23,6 +23,8 @@ export default async function Pacientes({ searchParams }: { searchParams: { q?: 
         <button className={botao}>Buscar</button>
       </form>
 
+      <p className="mt-3 text-sm"><Link href="/paciente/admin/pacientes/importar" className="underline">Importar planilha de pacientes</Link></p>
+
       <details className="mt-4 border border-mist bg-ivory p-4" open={!!searchParams.erro}>
         <summary className="cursor-pointer text-sm font-medium">+ Novo paciente</summary>
         <form action={criarPaciente} className="mt-4 space-y-3">
