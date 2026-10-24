@@ -2,6 +2,7 @@
 
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
+import { videoEmbedUrl } from '@/lib/video';
 
 const BASE = '/paciente/admin';
 
@@ -104,7 +105,11 @@ export async function publicarPost(formData: FormData) {
   const titulo = String(formData.get('titulo') ?? '').trim();
   const corpo = String(formData.get('corpo') ?? '').trim() || null;
   const imagem = formData.get('imagem');
+  const video_url = String(formData.get('video_url') ?? '').trim() || null;
   if (!titulo) voltar(base, 'erro', 'Informe o título.');
+  if (video_url && !videoEmbedUrl(video_url)) {
+    voltar(base, 'erro', 'Link de vídeo não reconhecido. Use um link do Vimeo, Bunny Stream ou YouTube.');
+  }
 
   let midia_path: string | null = null;
   if (imagem instanceof File && imagem.size > 0) {
@@ -116,7 +121,8 @@ export async function publicarPost(formData: FormData) {
   }
 
   const { error } = await supabase.from('posts').insert({
-    titulo, corpo, publicado: true, midia_path, tipo: midia_path ? 'imagem' : 'texto',
+    titulo, corpo, publicado: true, midia_path, video_url,
+    tipo: video_url ? 'video' : midia_path ? 'imagem' : 'texto',
   });
   if (error) voltar(base, 'erro', error.message);
   voltar(base, 'ok', 'Publicado no feed.');
