@@ -80,7 +80,10 @@ export async function POST(req: Request) {
     return NextResponse.json({ erro: 'Não consegui responder agora. Tente de novo ou fale com a clínica.' }, { status: 502 });
   }
   if (!resp.ok) {
-    console.error('agente: erro da API', resp.status, (await resp.text()).slice(0, 300));
+    const txt = await resp.text();
+    let motivo = txt;
+    try { motivo = JSON.parse(txt)?.error?.message ?? txt; } catch { /* mantém o texto bruto */ }
+    console.error(`agente ${resp.status} MOTIVO: ${String(motivo).slice(0, 200)}`);
     return NextResponse.json({ erro: 'Não consegui responder agora. Tente de novo ou fale com a clínica.' }, { status: 502 });
   }
 
