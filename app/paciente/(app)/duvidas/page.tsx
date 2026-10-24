@@ -1,18 +1,30 @@
-export default function Duvidas() {
+import { createClient } from '@/lib/supabase/server';
+import { Chat } from '@/components/paciente/Chat';
+
+export const dynamic = 'force-dynamic';
+
+export default async function Duvidas() {
+  const ativo = process.env.AGENTE_ATIVO === '1' && !!process.env.ANTHROPIC_API_KEY;
+  const { data: pid } = await createClient().rpc('current_patient_id');
+
   return (
     <section>
       <h1 className="font-display text-2xl">Dúvidas</h1>
-      <div className="mt-4 rounded-[18px] border border-mist bg-ivory p-6">
-        <p className="text-eyebrow uppercase tracking-editorial text-terracotta">Em breve</p>
-        <p className="mt-3 text-graphite">
-          Aqui você poderá tirar dúvidas gerais sobre o seu acompanhamento, com respostas baseadas
-          apenas nos materiais da clínica.
-        </p>
-        <p className="mt-3 text-sm text-ash">
-          O assistente não substitui a consulta. Para sintomas, ajustes de tratamento ou urgências,
-          fale com a clínica.
-        </p>
-      </div>
+      {ativo && pid ? (
+        <Chat />
+      ) : (
+        <div className="mt-4 rounded-[18px] border border-mist bg-ivory p-6">
+          <p className="text-eyebrow uppercase tracking-editorial text-terracotta">Em breve</p>
+          <p className="mt-3 text-graphite">
+            Aqui você poderá tirar dúvidas gerais sobre o seu acompanhamento, com respostas baseadas
+            apenas nos materiais da clínica.
+          </p>
+          <p className="mt-3 text-sm text-ash">
+            O assistente não substitui a consulta. Para sintomas, ajustes de tratamento ou urgências,
+            fale com a clínica.
+          </p>
+        </div>
+      )}
     </section>
   );
 }
