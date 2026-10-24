@@ -25,6 +25,8 @@ export default async function Post({ params }: { params: { id: string } }) {
   const c = (contagens ?? []).find((x: { post_id: string }) => x.post_id === p.id) as { total: number; curti: boolean } | undefined;
   const { data: pid } = await supabase.rpc('current_patient_id');
   const podeCurtir = !erroCurtidas && !!pid;
+  // Conta a abertura (uma vez por visita); se a função ainda não existir no banco, segue sem registrar.
+  if (pid) await supabase.rpc('registrar_abertura', { p_post: p.id });
 
   return (
     <article>

@@ -11,6 +11,14 @@ export default async function Publicacoes({ searchParams }: { searchParams: { ok
   const { data: posts } = await supabase.from('posts')
     .select('id, titulo, tipo, publicado, publicado_em').order('publicado_em', { ascending: false }).limit(50);
 
+  // Métricas (se a migração 0004 ainda não foi rodada, a lista aparece sem os números).
+  const { data: metricas } = await supabase.rpc('metricas_posts');
+  const m = new Map<string, { curtidas: number; pacientes: number; aberturas: number }>(
+    (metricas ?? []).map((x: { post_id: string; curtidas: number; pacientes: number; aberturas: number }) => [
+      x.post_id, { curtidas: Number(x.curtidas), pacientes: Number(x.pacientes), aberturas: Number(x.aberturas) },
+    ])
+  );
+
   return (
     <section>
       <h1 className="font-display text-display-sm">Publicações</h1>
@@ -43,6 +51,12 @@ export default async function Publicacoes({ searchParams }: { searchParams: { ok
                 {p.tipo === 'imagem' ? ' · imagem' : p.tipo === 'video' ? ' · vídeo' : ''}
                 {!p.publicado ? ' · rascunho (oculto)' : ''}
               </span>
+              {metricas && (
+                <span className="mt-0.5 block text-ash">
+                  ♥ {m.get(p.id)?.curtidas ?? 0} curtida(s) · {m.get(p.id)?.pacientes ?? 0} paciente(s) abriram
+                  ({m.get(p.id)?.aberturas ?? 0} aberturas)
+                </span>
+              )}
             </Link>
             <Link href={`/paciente/admin/publicacoes/${p.id}`} className="underline text-terracotta">Editar</Link>
             <form action={removerPost}><input type="hidden" name="id" value={p.id} /><button className="underline text-ash">Remover</button></form>
