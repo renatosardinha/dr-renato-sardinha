@@ -10,6 +10,7 @@ const ITENS = [
   { href: '/paciente/admin/pacientes', label: 'Pacientes' },
   { href: '/paciente/admin/publicacoes', label: 'Publicações' },
   { href: '/paciente/admin/duvidas', label: 'Dúvidas (agente)' },
+  { href: '/paciente/admin/indicacoes', label: 'Indicações' },
 ];
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {

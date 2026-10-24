@@ -175,3 +175,54 @@ export async function removerPost(formData: FormData) {
   await supabase.from('posts').delete().eq('id', id);
   voltar(`${BASE}/publicacoes`, 'ok', 'Publicação removida.');
 }
+
+// ---------- Indicações ----------
+const CATEGORIAS = ['farmacia', 'suplementos', 'profissionais', 'servicos', 'outros'];
+
+function dadosIndicacao(formData: FormData) {
+  const txt = (k: string) => String(formData.get(k) ?? '').trim() || null;
+  const categoria = String(formData.get('categoria') ?? 'outros');
+  const nome = String(formData.get('nome') ?? '').trim();
+
+  let whatsapp = (txt('whatsapp') ?? '').replace(/\D/g, '') || null;
+  if (whatsapp && whatsapp.length <= 11) whatsapp = '55' + whatsapp;
+
+  let instagram = txt('instagram');
+  if (instagram && !/^https:\/\//i.test(instagram)) instagram = `https://instagram.com/${instagram.replace(/^@/, '')}`;
+  let site = txt('site');
+  if (site && !/^https:\/\//i.test(site)) site = `https://${site.replace(/^http:\/\//i, '')}`;
+
+  return {
+    categoria: CATEGORIAS.includes(categoria) ? categoria : 'outros',
+    nome, descricao: txt('descricao'), whatsapp, instagram, site, cupom: txt('cupom'),
+    ordem: Number.parseInt(String(formData.get('ordem') ?? '0'), 10) || 0,
+  };
+}
+
+export async function criarIndicacao(formData: FormData) {
+  const supabase = await exigirAdmin();
+  const base = `${BASE}/indicacoes`;
+  const d = dadosIndicacao(formData);
+  if (!d.nome) voltar(base, 'erro', 'Informe o nome.');
+  const { error } = await supabase.from('indicacoes').insert(d);
+  if (error) voltar(base, 'erro', error.message);
+  voltar(base, 'ok', `${d.nome} adicionado.`);
+}
+
+export async function atualizarIndicacao(formData: FormData) {
+  const supabase = await exigirAdmin();
+  const id = String(formData.get('id') ?? '');
+  const base = `${BASE}/indicacoes/${id}`;
+  const d = dadosIndicacao(formData);
+  if (!id || !d.nome) voltar(base, 'erro', 'Informe o nome.');
+  const { error } = await supabase.from('indicacoes').update({ ...d, ativo: formData.get('ativo') === 'on' }).eq('id', id);
+  if (error) voltar(base, 'erro', error.message);
+  voltar(base, 'ok', 'Indicação atualizada.');
+}
+
+export async function removerIndicacao(formData: FormData) {
+  const supabase = await exigirAdmin();
+  const id = String(formData.get('id') ?? '');
+  await supabase.from('indicacoes').delete().eq('id', id);
+  voltar(`${BASE}/indicacoes`, 'ok', 'Indicação removida.');
+}

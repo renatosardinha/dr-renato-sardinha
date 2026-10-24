@@ -24,9 +24,9 @@ export function SideNav({ items }: { items: NavItem[] }) {
   );
 }
 
-import { Home, FileText, MessageCircleQuestion, type LucideIcon } from 'lucide-react';
+import { Home, FileText, MessageCircleQuestion, Store, type LucideIcon } from 'lucide-react';
 
-const ICONES: Record<string, LucideIcon> = { feed: Home, documentos: FileText, duvidas: MessageCircleQuestion };
+const ICONES: Record<string, LucideIcon> = { feed: Home, documentos: FileText, duvidas: MessageCircleQuestion, indicacoes: Store };
 export type PacienteItem = NavItem & { icone: keyof typeof ICONES };
 
 /** Menu do paciente: faixa lateral só com ícones (computador) e barra fixa embaixo (celular). */
