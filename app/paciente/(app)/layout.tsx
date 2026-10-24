@@ -16,6 +16,8 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   const { data: { user } } = await supabase.auth.getUser();
   const { data: pid } = await supabase.rpc('current_patient_id');
   const { data: admin } = await supabase.rpc('is_admin');
+  // Conta 1 acesso por dia (se a função ainda não existir no banco, segue normalmente).
+  if (pid) await supabase.rpc('registrar_acesso');
 
   if (!pid && !admin) {
     return (
