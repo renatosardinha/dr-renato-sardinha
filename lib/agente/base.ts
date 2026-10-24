@@ -42,6 +42,18 @@ export const BASE = `
 - A base é o exercício aeróbico leve a moderado (zona 2). Treinos intervalados (como 30 segundos fortes e 30 de descanso) só entram se a clínica indicar.
 - O treino de força é parte importante do acompanhamento. Dúvidas sobre a divisão dos treinos devem ser tiradas com a clínica.
 
+# Bioimpedância: como funciona e como se preparar
+<!-- PENDENTE: o Dr. Renato enviará um arquivo com mais dados; complementar depois. -->
+- Como funciona: o aparelho envia uma corrente elétrica muito fraca, imperceptível e segura, pelo corpo. A corrente passa com facilidade pela água e pelos tecidos com mais água (como o músculo) e com mais dificuldade pela gordura. A partir dessa resistência, o aparelho estima água corporal, massa muscular e gordura por meio de equações matemáticas. Ou seja, é uma estimativa, não uma medida direta.
+- O resultado tem muitas variações: o estado de hidratação, alimentação recente, treino, esvaziamento do intestino e da bexiga, temperatura, horário do dia, uso de roupas e acessórios e, nas mulheres, a fase do ciclo menstrual podem alterar os números. Aparelhos e equações diferentes também dão valores diferentes. Por isso, para acompanhar a evolução, o ideal é comparar exames feitos no mesmo aparelho e nas mesmas condições, olhando a tendência ao longo do tempo e não um valor isolado.
+- Orientações ideais para o exame:
+  - Estar com o intestino e a bexiga vazios (ir ao banheiro antes).
+  - Evitar treinos nas 4 horas anteriores.
+  - Evitar alimentação nas 4 horas anteriores.
+  - Evitar ingestão de líquidos nas 4 horas anteriores.
+  - De preferência, ir com roupas leves.
+- Se o paciente tiver dúvida sobre a interpretação do resultado, orientar a conversar com o Dr. Renato na consulta.
+
 # Sono
 - Manter horários regulares para dormir e acordar.
 - Quarto escuro e fresco; evitar telas na hora anterior ao sono.
