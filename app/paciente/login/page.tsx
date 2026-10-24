@@ -48,13 +48,14 @@ export default function LoginPage() {
     router.refresh();
   }
 
-  const input = 'w-full border border-mist bg-ivory px-4 py-3 text-base outline-none focus:border-terracotta';
-  const botao = 'w-full bg-ink text-ivory py-3 text-sm tracking-wide disabled:opacity-50';
+  const input = 'w-full rounded-lg border border-mist bg-ivory px-4 py-3 text-base outline-none focus:border-terracotta-deep';
+  const botao = 'w-full rounded-full bg-ink py-3 text-[15px] font-semibold text-ivory disabled:opacity-50';
 
   return (
     <main className="mx-auto flex min-h-screen max-w-md flex-col justify-center px-6">
-      <p className="text-eyebrow uppercase tracking-editorial text-terracotta">Clínica RS</p>
-      <h1 className="mt-3 font-display text-display-sm">Área do paciente</h1>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/images/logo-mark.svg" alt="Clínica RS" className="h-14 w-14 rounded-full border border-mist bg-ivory p-1" />
+      <h1 className="mt-4 font-display text-3xl">Área do paciente</h1>
       <p className="mt-3 text-graphite">
         {etapa === 'email'
           ? 'Informe o e-mail cadastrado na clínica. Enviaremos um código de acesso.'

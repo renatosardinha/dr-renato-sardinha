@@ -24,23 +24,45 @@ export function SideNav({ items }: { items: NavItem[] }) {
   );
 }
 
-/** Menu do paciente: barra no topo (desktop) e barra fixa embaixo (celular). */
-export function PacienteTabs({ items }: { items: NavItem[] }) {
+import { Home, FileText, MessageCircleQuestion, type LucideIcon } from 'lucide-react';
+
+const ICONES: Record<string, LucideIcon> = { feed: Home, documentos: FileText, duvidas: MessageCircleQuestion };
+export type PacienteItem = NavItem & { icone: keyof typeof ICONES };
+
+/** Menu do paciente: faixa lateral só com ícones (computador) e barra fixa embaixo (celular). */
+export function PacienteTabs({ items }: { items: PacienteItem[] }) {
   const pathname = usePathname();
-  const cls = (i: NavItem) =>
-    `px-3 py-2 text-sm ${ativo(pathname, i) ? 'text-ink border-b-2 border-terracotta' : 'text-ash'}`;
   return (
     <>
-      <nav className="hidden gap-2 md:flex" aria-label="Menu">
-        {items.map((i) => <Link key={i.href} href={i.href} className={cls(i)}>{i.label}</Link>)}
+      <nav className="fixed inset-y-0 left-0 z-20 hidden w-20 flex-col items-center gap-2 border-r border-mist bg-ivory py-4 md:flex" aria-label="Menu">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/logo-mark.svg" alt="Clínica RS" className="mb-4 h-10 w-10 rounded-full border border-mist p-0.5" />
+        {items.map((i) => {
+          const Icone = ICONES[i.icone];
+          const on = ativo(pathname, i);
+          return (
+            <Link key={i.href} href={i.href} title={i.label} aria-label={i.label} aria-current={on ? 'page' : undefined}
+              className="relative flex h-12 w-full items-center justify-center">
+              {on && <span className="absolute left-0 h-8 w-1 bg-ink" />}
+              <span className={`flex h-11 w-11 items-center justify-center rounded-full ${on ? 'bg-sand' : 'hover:bg-sand'}`}>
+                <Icone strokeWidth={1.5} className="h-6 w-6 stroke-ink" />
+              </span>
+            </Link>
+          );
+        })}
       </nav>
-      <nav className="fixed inset-x-0 bottom-0 z-10 flex justify-around border-t border-mist bg-ivory pb-[env(safe-area-inset-bottom)] md:hidden" aria-label="Menu">
-        {items.map((i) => (
-          <Link key={i.href} href={i.href}
-            className={`flex-1 py-3 text-center text-xs ${ativo(pathname, i) ? 'text-ink font-medium' : 'text-ash'}`}>
-            {i.label}
-          </Link>
-        ))}
+      <nav className="fixed inset-x-0 bottom-0 z-20 flex justify-around border-t border-mist bg-ivory pb-[env(safe-area-inset-bottom)] md:hidden" aria-label="Menu">
+        {items.map((i) => {
+          const Icone = ICONES[i.icone];
+          const on = ativo(pathname, i);
+          return (
+            <Link key={i.href} href={i.href} aria-current={on ? 'page' : undefined}
+              className={`flex flex-1 flex-col items-center gap-1 py-2.5 text-xs ${on ? 'font-semibold text-ink' : 'text-ash'}`}>
+              <Icone strokeWidth={on ? 1.8 : 1.5} className={`h-6 w-6 ${on ? 'stroke-ink' : 'stroke-ash'}`} />
+              {i.label}
+            </Link>
+          );
+        })}
       </nav>
     </>
   );
