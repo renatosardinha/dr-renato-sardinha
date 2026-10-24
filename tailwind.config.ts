@@ -14,6 +14,7 @@ const config: Config = {
         sand:      '#E8DFD2',  // areia (cartões/divisões)
         clay:      '#C9B8A1',  // bege médio
         terracotta:'#A66E4E',  // acento terroso quente
+        'terracotta-deep':'#9A5E3F', // versão mais escura para botões (contraste AA com texto claro)
         umber:     '#6B4F3A',  // marrom profundo
         ink:       '#1F1B16',  // “preto” desaturado para texto
         graphite:  '#3D362E',  // texto secundário

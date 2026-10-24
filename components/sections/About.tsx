@@ -1,3 +1,4 @@
+import { Em } from '@/components/Em';
 import Image from 'next/image';
 import { Reveal } from '@/components/Reveal';
 import { site } from '@/lib/content';
@@ -20,7 +21,7 @@ export function About() {
 
             <Reveal delay={0.1}>
               <h2 className="font-display text-display-lg text-pretty display-treatment">
-                {about.title}
+                <Em text={about.title} />
               </h2>
             </Reveal>
 
@@ -47,7 +48,7 @@ export function About() {
           <div className="md:col-span-7 md:pt-16">
             {/* Ambiente — proporção 4:3, moldura fina consistente com o design system */}
             <Reveal>
-              <div className="relative aspect-[4/3] w-full overflow-hidden border border-mist mb-12">
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-mist mb-12">
                 <Image
                   src={about.image}
                   alt={about.imageAlt}

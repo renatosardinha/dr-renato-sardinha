@@ -37,6 +37,8 @@ export interface SiteContent {
     secondaryCta: Cta;
     image: string;
     imageAlt: string;
+    /** Vídeo de fundo do topo (mp4, sem som). Opcional: sem ele, o topo usa o retrato. */
+    video?: string;
   };
   about: {
     eyebrow: string;

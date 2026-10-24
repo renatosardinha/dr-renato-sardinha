@@ -37,7 +37,7 @@ export function Navbar() {
         )}
       >
         <div className="container-editorial flex items-center justify-between h-20 md:h-24">
-          <a href="#top" className="block text-ink" aria-label={site.brand.name}>
+          <a href="#top" className={clsx('block transition-colors duration-500', scrolled ? 'text-ink' : 'text-ivory')} aria-label={site.brand.name}>
             <Logo className="h-6 md:h-7 w-auto" />
           </a>
 
@@ -47,7 +47,7 @@ export function Navbar() {
               <a
                 key={item.href}
                 href={item.href}
-                className="text-sm text-graphite hover:text-ink transition-colors duration-500"
+                className={clsx('text-sm transition-colors duration-500', scrolled ? 'text-graphite hover:text-ink' : 'text-ivory/80 hover:text-ivory')}
               >
                 {item.label}
               </a>
@@ -56,7 +56,7 @@ export function Navbar() {
               href={site.contact.whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm tracking-wider uppercase text-ink border-b border-ink pb-0.5 hover:opacity-60 transition-opacity duration-500"
+              className="rounded-full bg-terracotta-deep px-5 py-2.5 text-sm font-medium text-ivory transition-colors duration-500 hover:bg-umber"
             >
               Agendar
             </a>
@@ -65,7 +65,7 @@ export function Navbar() {
           {/* Mobile trigger */}
           <button
             onClick={() => setOpen(true)}
-            className="lg:hidden text-ink"
+            className={clsx('lg:hidden', scrolled ? 'text-ink' : 'text-ivory')}
             aria-label="Abrir menu"
           >
             <Menu strokeWidth={1.2} className="w-6 h-6" />
