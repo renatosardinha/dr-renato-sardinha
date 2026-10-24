@@ -8,6 +8,7 @@ const ITENS = [
   { href: '/paciente', label: 'Feed', exact: true, icone: 'feed' as const },
   { href: '/paciente/documentos', label: 'Documentos', icone: 'documentos' as const },
   { href: '/paciente/duvidas', label: 'Dúvidas', icone: 'duvidas' as const },
+  { href: '/paciente/indicacoes', label: 'Indicações', icone: 'indicacoes' as const },
 ];
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
