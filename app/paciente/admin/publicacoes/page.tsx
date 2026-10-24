@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
 import { publicarPost, removerPost } from '../actions';
 import { Avisos } from '@/components/paciente/Avisos';
@@ -8,7 +9,7 @@ export const dynamic = 'force-dynamic';
 export default async function Publicacoes({ searchParams }: { searchParams: { ok?: string; erro?: string } }) {
   const supabase = createClient();
   const { data: posts } = await supabase.from('posts')
-    .select('id, titulo, tipo, publicado_em').order('publicado_em', { ascending: false }).limit(50);
+    .select('id, titulo, tipo, publicado, publicado_em').order('publicado_em', { ascending: false }).limit(50);
 
   return (
     <section>
@@ -35,7 +36,15 @@ export default async function Publicacoes({ searchParams }: { searchParams: { ok
       <ul className="mt-3 divide-y divide-mist border-y border-mist">
         {(posts ?? []).map((p) => (
           <li key={p.id} className="flex items-center justify-between gap-3 py-3 text-sm">
-            <span>{p.titulo}<br /><span className="text-ash">{new Date(p.publicado_em).toLocaleDateString('pt-BR')}{p.tipo === 'imagem' ? ' · imagem' : p.tipo === 'video' ? ' · vídeo' : ''}</span></span>
+            <Link href={`/paciente/admin/publicacoes/${p.id}`} className="flex-1 hover:underline">
+              {p.titulo}<br />
+              <span className="text-ash">
+                {new Date(p.publicado_em).toLocaleDateString('pt-BR')}
+                {p.tipo === 'imagem' ? ' · imagem' : p.tipo === 'video' ? ' · vídeo' : ''}
+                {!p.publicado ? ' · rascunho (oculto)' : ''}
+              </span>
+            </Link>
+            <Link href={`/paciente/admin/publicacoes/${p.id}`} className="underline text-terracotta">Editar</Link>
             <form action={removerPost}><input type="hidden" name="id" value={p.id} /><button className="underline text-ash">Remover</button></form>
           </li>
         ))}

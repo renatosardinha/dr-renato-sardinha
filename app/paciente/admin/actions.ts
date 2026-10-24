@@ -128,6 +128,45 @@ export async function publicarPost(formData: FormData) {
   voltar(base, 'ok', 'Publicado no feed.');
 }
 
+export async function atualizarPost(formData: FormData) {
+  const supabase = await exigirAdmin();
+  const id = String(formData.get('id') ?? '');
+  const base = `${BASE}/publicacoes/${id}`;
+  const titulo = String(formData.get('titulo') ?? '').trim();
+  const corpo = String(formData.get('corpo') ?? '').trim() || null;
+  const video_url = String(formData.get('video_url') ?? '').trim() || null;
+  const publicado = formData.get('publicado') === 'on';
+  const removerImagem = formData.get('remover_imagem') === 'on';
+  const imagem = formData.get('imagem');
+  if (!id || !titulo) voltar(base, 'erro', 'Informe o título.');
+  if (video_url && !videoEmbedUrl(video_url)) {
+    voltar(base, 'erro', 'Link de vídeo não reconhecido. Use um link do Vimeo, Bunny Stream ou YouTube.');
+  }
+
+  const { data: atual } = await supabase.from('posts').select('midia_path').eq('id', id).maybeSingle();
+  let midia_path: string | null = atual?.midia_path ?? null;
+
+  if (imagem instanceof File && imagem.size > 0) {
+    if (!TIPOS_IMG.includes(imagem.type)) voltar(base, 'erro', 'Imagem deve ser JPG, PNG ou WebP.');
+    if (imagem.size > MAX_BYTES) voltar(base, 'erro', 'Imagem acima de 4 MB.');
+    const novo = `posts/${Date.now()}-${nomeSeguro(imagem.name)}`;
+    const { error: upErr } = await supabase.storage.from('feed').upload(novo, imagem, { contentType: imagem.type });
+    if (upErr) voltar(base, 'erro', 'Falha ao enviar a imagem: ' + upErr.message);
+    if (midia_path) await supabase.storage.from('feed').remove([midia_path]);
+    midia_path = novo;
+  } else if (removerImagem && midia_path) {
+    await supabase.storage.from('feed').remove([midia_path]);
+    midia_path = null;
+  }
+
+  const { error } = await supabase.from('posts').update({
+    titulo, corpo, video_url, publicado, midia_path,
+    tipo: video_url ? 'video' : midia_path ? 'imagem' : 'texto',
+  }).eq('id', id);
+  if (error) voltar(base, 'erro', error.message);
+  voltar(base, 'ok', 'Publicação atualizada.');
+}
+
 export async function removerPost(formData: FormData) {
   const supabase = await exigirAdmin();
   const id = String(formData.get('id') ?? '');
