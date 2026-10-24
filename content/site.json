@@ -45,6 +45,8 @@
     "primaryCta": { "label": "Agendar pelo WhatsApp", "href": "https://wa.me/5517997672746" },
     "secondaryCta": { "label": "Conhecer o acompanhamento", "href": "#acompanhamento" },
     "image": "/images/portrait.jpg",
+    "video": "/videos/hero.mp4",
+    "videoPoster": "/images/hero-poster.jpg",
     "imageAlt": "Dr. Renato Sardinha"
   },
 

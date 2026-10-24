@@ -39,6 +39,8 @@ export interface SiteContent {
     imageAlt: string;
     /** Vídeo de fundo do topo (mp4, sem som). Opcional: sem ele, o topo usa o retrato. */
     video?: string;
+    /** Imagem mostrada enquanto o vídeo carrega (ou se o visitante preferir menos movimento). */
+    videoPoster?: string;
   };
   about: {
     eyebrow: string;
