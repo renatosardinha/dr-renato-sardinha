@@ -40,7 +40,7 @@
 
   "hero": {
     "eyebrow": "Medicina integrativa baseada em evidência",
-    "headline": "Saúde com evidência.\nCuidado com presença.",
+    "headline": "Saúde com evidência.\nCuidado com *presença*.",
     "subheadline": "Acompanhamento médico que considera o paciente por inteiro — não em fragmentos. Critério científico, escuta atenta e decisões clínicas construídas com você.",
     "primaryCta": { "label": "Agendar pelo WhatsApp", "href": "https://wa.me/5517997672746" },
     "secondaryCta": { "label": "Conhecer o acompanhamento", "href": "#acompanhamento" },
@@ -50,7 +50,7 @@
 
   "about": {
     "eyebrow": "Filosofia clínica",
-    "title": "Cuidar é um ato de critério.",
+    "title": "Cuidar é um ato de *critério*.",
     "lead": "Acredito em uma medicina que respeita a complexidade de quem chega ao consultório. Não há protocolo universal — há pessoa, contexto e tempo.",
     "paragraphs": [
       "Sou médico formado pela UNIUBE, com pós-graduação em Nutrologia Esportiva e formação em curso em Psiquiatria e Prática Baseada em Evidência. Meu trabalho se constrói no encontro entre ciência rigorosa e cuidado próximo.",
@@ -69,7 +69,7 @@
 
   "process": {
     "eyebrow": "Como funciona",
-    "title": "Um acompanhamento construído em camadas.",
+    "title": "Um acompanhamento construído em *camadas*.",
     "lead": "Cada etapa existe por uma razão clínica — e respeita o tempo de quem está sendo cuidado.",
     "steps": [
       {
@@ -101,7 +101,7 @@
 
   "audience": {
     "eyebrow": "Para quem é",
-    "title": "Para quem busca cuidado com critério.",
+    "title": "Para quem busca cuidado com *critério*.",
     "lead": "Este acompanhamento foi pensado para pessoas que valorizam tempo, escuta e ciência — e que recusam atalhos.",
     "items": [
       {
@@ -125,7 +125,7 @@
 
   "differentials": {
     "eyebrow": "O que distingue",
-    "title": "Critério antes de conduta.",
+    "title": "Critério antes de *conduta*.",
     "items": [
       { "title": "Medicina baseada em evidência",   "body": "Cada decisão clínica é fundamentada na melhor literatura disponível — não em modismos." },
       { "title": "Individualização real",            "body": "Plano construído para o seu caso. Não há receita pronta, não há protocolo de vitrine." },
@@ -138,7 +138,7 @@
 
   "testimonials": {
     "eyebrow": "Em primeira pessoa",
-    "title": "O que dizem pacientes que confiaram no processo.",
+    "title": "O que dizem pacientes que *confiaram* no processo.",
     "items": [
       {
         "quote": "Pela primeira vez senti que um médico olhou para o todo. Saí com clareza, não com uma receita.",
@@ -165,7 +165,7 @@
 
   "faq": {
     "eyebrow": "Perguntas frequentes",
-    "title": "Antes de agendar.",
+    "title": "Antes de *agendar*.",
     "items": [
       {
         "q": "Como funciona a primeira consulta?",
@@ -200,7 +200,7 @@
 
   "cta": {
     "eyebrow": "Próximo passo",
-    "title": "Se faz sentido para você,\nfaz sentido conversarmos.",
+    "title": "Se faz sentido para você,\nfaz sentido *conversarmos*.",
     "lead": "O agendamento é direto, pelo WhatsApp. A secretaria responde em horário comercial.",
     "primary": { "label": "Agendar pelo WhatsApp", "href": "https://wa.me/5517997672746" },
     "secondary": { "label": "Conhecer o Instagram", "href": "https://instagram.com/drrenatosardinha" }

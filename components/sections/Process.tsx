@@ -16,10 +16,10 @@ export function Process() {
         />
 
         {/* Etapas — grid editorial 2x2 com numerais display */}
-        <div className="grid md:grid-cols-2 gap-px bg-mist border border-mist">
+        <div className="grid md:grid-cols-2 gap-4 md:gap-6">
           {process.steps.map((step, i) => (
             <Reveal key={step.n} delay={i * 0.08}>
-              <article className="group bg-bone p-10 md:p-14 h-full transition-colors duration-700 hover:bg-ivory">
+              <article className="group rounded-3xl bg-sand/50 p-10 md:p-12 h-full transition-colors duration-700 hover:bg-sand/80">
                 <div className="flex items-start justify-between mb-8">
                   <span className="font-display text-display-md text-clay group-hover:text-umber transition-colors duration-700">
                     {step.n}

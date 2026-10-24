@@ -1,5 +1,6 @@
 'use client';
 
+import { Em } from '@/components/Em';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
@@ -25,7 +26,7 @@ export function CTAFinal() {
         <Reveal delay={0.1}>
           <h2 className="mt-8 font-display text-display-lg !text-bone text-pretty display-treatment max-w-4xl">
             {cta.title.split('\n').map((line, i) => (
-              <span key={i} className="block">{line}</span>
+              <span key={i} className="block"><Em text={line} /></span>
             ))}
           </h2>
         </Reveal>
@@ -42,7 +43,7 @@ export function CTAFinal() {
               href={cta.primary.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 px-8 py-5 bg-bone text-ink font-sans text-sm tracking-wider uppercase transition-all duration-500 ease-editorial hover:bg-sand hover:gap-5"
+              className="group inline-flex items-center gap-3 rounded-full px-8 py-4 bg-bone text-ink font-sans text-base font-medium transition-all duration-500 ease-editorial hover:bg-sand hover:gap-5"
             >
               {cta.primary.label}
               <ArrowUpRight strokeWidth={1.2} className="w-4 h-4 transition-transform duration-500 group-hover:rotate-45" />
@@ -51,7 +52,7 @@ export function CTAFinal() {
               href={cta.secondary.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-5 border border-bone/30 text-bone font-sans text-sm tracking-wider uppercase transition-all duration-500 hover:border-bone hover:gap-5"
+              className="inline-flex items-center gap-3 rounded-full px-8 py-4 border border-bone/30 text-bone font-sans text-base font-medium transition-all duration-500 hover:border-bone hover:gap-5"
             >
               {cta.secondary.label}
             </a>

@@ -1,4 +1,5 @@
 import { Reveal } from './Reveal';
+import { Em } from './Em';
 
 type Props = {
   eyebrow: string;
@@ -23,7 +24,7 @@ export function SectionHeader({ eyebrow, title, lead, align = 'left', index }: P
       <Reveal delay={0.1}>
         <h2 className="font-display text-display-md text-pretty display-treatment">
           {title.split('\n').map((line, i) => (
-            <span key={i} className="block">{line}</span>
+            <span key={i} className="block"><Em text={line} /></span>
           ))}
         </h2>
       </Reveal>

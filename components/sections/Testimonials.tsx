@@ -1,5 +1,6 @@
 'use client';
 
+import { Em } from '@/components/Em';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
@@ -28,7 +29,7 @@ export function Testimonials() {
 
         <Reveal delay={0.1}>
           <h2 className="font-display text-display-md max-w-3xl text-pretty display-treatment">
-            {testimonials.title}
+            <Em text={testimonials.title} />
           </h2>
         </Reveal>
 

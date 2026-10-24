@@ -117,17 +117,25 @@
 
   /* Botão primário editorial */
   .btn-primary {
-    @apply inline-flex items-center gap-3 px-7 py-4 bg-ink text-bone
-           font-sans text-sm tracking-wider uppercase
+    @apply inline-flex items-center gap-3 rounded-full px-7 py-3.5 bg-terracotta-deep text-ivory
+           font-sans text-base font-medium
            transition-all duration-500 ease-editorial
-           hover:bg-graphite hover:gap-5;
+           hover:bg-umber hover:gap-5;
   }
 
   .btn-ghost {
-    @apply inline-flex items-center gap-3 px-7 py-4 border border-ink/15 text-ink
-           font-sans text-sm tracking-wider uppercase
+    @apply inline-flex items-center gap-3 rounded-full px-7 py-3.5 border border-terracotta-deep text-terracotta-deep
+           font-sans text-base font-medium
            transition-all duration-500 ease-editorial
-           hover:border-ink hover:gap-5;
+           hover:bg-terracotta-deep hover:text-ivory hover:gap-5;
+  }
+
+  /* Variante para fundos escuros (hero com vídeo, chamada final) */
+  .btn-ghost-light {
+    @apply inline-flex items-center gap-3 rounded-full px-7 py-3.5 border border-ivory/50 text-ivory
+           font-sans text-base font-medium
+           transition-all duration-500 ease-editorial
+           hover:border-ivory hover:bg-ivory/10 hover:gap-5;
   }
 }
 
