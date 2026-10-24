@@ -70,7 +70,6 @@ export async function POST(req: Request) {
       body: JSON.stringify({
         model: MODELO,
         max_tokens: 700,
-        temperature: 0.3,
         system: [{ type: 'text', text: SISTEMA, cache_control: { type: 'ephemeral' } }],
         messages: [...historico, { role: 'user', content: mensagem }],
       }),
