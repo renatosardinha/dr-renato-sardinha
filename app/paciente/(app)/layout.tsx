@@ -5,9 +5,9 @@ import { PacienteTabs } from '@/components/paciente/NavLinks';
 export const dynamic = 'force-dynamic';
 
 const ITENS = [
-  { href: '/paciente', label: 'Feed', exact: true },
-  { href: '/paciente/documentos', label: 'Meus documentos' },
-  { href: '/paciente/duvidas', label: 'Dúvidas' },
+  { href: '/paciente', label: 'Feed', exact: true, icone: 'feed' as const },
+  { href: '/paciente/documentos', label: 'Documentos', icone: 'documentos' as const },
+  { href: '/paciente/duvidas', label: 'Dúvidas', icone: 'duvidas' as const },
 ];
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
@@ -35,21 +35,23 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   }
 
   return (
-    <div className="pb-20 md:pb-0">
-      <header className="border-b border-mist bg-ivory">
-        <div className="mx-auto flex max-w-2xl items-center justify-between gap-4 px-6 py-3">
-          <div>
-            <p className="text-eyebrow uppercase tracking-editorial text-terracotta">Clínica RS</p>
-            {nome && <p className="text-sm text-graphite">Olá, {nome}</p>}
+    <div className="min-h-screen md:pl-20">
+      <PacienteTabs items={ITENS} />
+      <header className="sticky top-0 z-10 border-b border-mist bg-ivory">
+        <div className="mx-auto flex h-14 max-w-[600px] items-center justify-between gap-3 px-4">
+          <div className="min-w-0">
+            <p className="font-display text-lg leading-none">Clínica RS</p>
+            {nome && <p className="mt-1 truncate text-xs text-ash">Olá, {nome}</p>}
           </div>
-          <PacienteTabs items={ITENS} />
-          <div className="flex items-center gap-3 text-sm">
-            {admin && <Link href="/paciente/admin" className="underline text-terracotta">Painel admin</Link>}
-            <form action="/paciente/sair" method="post"><button className="underline text-ash">Sair</button></form>
+          <div className="flex items-center gap-2 text-sm font-semibold">
+            {admin && <Link href="/paciente/admin" className="rounded-full border border-mist px-4 py-2 text-terracotta-deep hover:bg-sand">Painel admin</Link>}
+            <form action="/paciente/sair" method="post">
+              <button className="rounded-full bg-ink px-4 py-2 text-ivory">Sair</button>
+            </form>
           </div>
         </div>
       </header>
-      <div className="mx-auto max-w-2xl px-6 py-10">{children}</div>
+      <main className="mx-auto max-w-[600px] px-4 pb-28 pt-4 md:pb-10">{children}</main>
     </div>
   );
 }
