@@ -13,6 +13,7 @@ export function Hero() {
   const [tocando, setTocando] = useState(false);
   const headlineLines = hero.headline.split('\n');
   const temVideo = Boolean(hero.video);
+  const noFundo = temVideo;
 
   // Vídeo de fundo: sem som, em loop; não toca sozinho para quem pediu menos movimento
   useEffect(() => {
@@ -36,12 +37,12 @@ export function Hero() {
     <>
       <section id="top" className="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-ink text-ivory">
         {/* Fundo: vídeo (sem som) ou, enquanto não há vídeo, um degradê quente */}
-        {temVideo ? (
+        {noFundo ? (
           <video
             ref={videoRef}
             className="absolute inset-0 -z-20 h-full w-full object-cover"
             src={hero.video}
-            poster={hero.image}
+            poster={hero.videoPoster ?? hero.image}
             autoPlay muted loop playsInline preload="metadata"
             aria-hidden="true" tabIndex={-1}
           />
@@ -65,7 +66,7 @@ export function Hero() {
           </motion.div>
 
           <div className="grid items-end gap-10 md:grid-cols-12 md:gap-12">
-            <div className={temVideo ? 'md:col-span-10 lg:col-span-9' : 'md:col-span-7 lg:col-span-8'}>
+            <div className={noFundo ? 'md:col-span-10 lg:col-span-9' : 'md:col-span-7 lg:col-span-8'}>
               <h1 className="font-display text-display-lg text-pretty tracking-tightest display-treatment leading-[0.98] !text-ivory">
                 {headlineLines.map((line, lineIdx) => (
                   <span key={lineIdx} className="block overflow-hidden pb-[0.08em]">
@@ -99,8 +100,8 @@ export function Hero() {
               </motion.div>
             </div>
 
-            {/* Sem vídeo: retrato em cartão arredondado. Com vídeo, o próprio fundo é o retrato. */}
-            {!temVideo && (
+            {/* Sem vídeo de fundo: cartão arredondado com o vídeo (modo 'cartao') ou o retrato */}
+            {!noFundo && (
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -129,7 +130,7 @@ export function Hero() {
           <button
             onClick={alternar}
             aria-label={tocando ? 'Pausar vídeo de fundo' : 'Reproduzir vídeo de fundo'}
-            className="absolute bottom-28 right-6 flex h-11 w-11 items-center justify-center rounded-full border border-ivory/40 text-ivory transition-colors hover:bg-ivory/10 md:bottom-10 md:right-28"
+            className="absolute bottom-44 right-6 flex h-11 w-11 items-center justify-center rounded-full border border-ivory/40 text-ivory transition-colors hover:bg-ivory/10 md:bottom-10 md:right-28"
           >
             {tocando ? <Pause strokeWidth={1.4} className="h-4 w-4" /> : <Play strokeWidth={1.4} className="h-4 w-4" />}
           </button>
