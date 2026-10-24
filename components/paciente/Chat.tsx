@@ -5,6 +5,15 @@ import { Send } from 'lucide-react';
 
 type Msg = { role: 'user' | 'assistant'; content: string };
 
+/** Transforma endereços https:// em links clicáveis (só https). */
+function comLinks(texto: string) {
+  return texto.split(/(https:\/\/[^\s<>)]+)/g).map((parte, i) =>
+    /^https:\/\//.test(parte)
+      ? <a key={i} href={parte} target="_blank" rel="noopener noreferrer" className="break-all underline text-terracotta-deep">{parte}</a>
+      : parte
+  );
+}
+
 export function Chat() {
   const [msgs, setMsgs] = useState<Msg[]>([]);
   const [texto, setTexto] = useState('');
@@ -48,7 +57,7 @@ export function Chat() {
         {msgs.map((m, i) => (
           <div key={i} className={m.role === 'user' ? 'flex justify-end' : 'flex justify-start'}>
             <p className={`max-w-[85%] whitespace-pre-line rounded-[18px] px-4 py-3 text-[15px] leading-relaxed ${
-              m.role === 'user' ? 'bg-ink text-ivory' : 'border border-mist bg-ivory text-graphite'}`}>{m.content}</p>
+              m.role === 'user' ? 'bg-ink text-ivory' : 'border border-mist bg-ivory text-graphite'}`}>{m.role === 'assistant' ? comLinks(m.content) : m.content}</p>
           </div>
         ))}
         {enviando && <p className="text-sm text-ash">Digitando…</p>}
