@@ -14,7 +14,7 @@ export default function LGPDPage() {
           <h1 className="mt-6 font-display text-display-md">LGPD</h1>
 
           <div className="mt-12 space-y-6 text-graphite leading-relaxed">
-            <p>Atuamos em conformidade com a Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018), tratando seus dados pessoais com critério, finalidade legítima e segurança técnica adequada.</p>
+            <p>Atuamos em conformidade com a Lei Geral de Proteção de Dados (LGPD, Lei nº 13.709/2018), tratando seus dados pessoais com critério, finalidade legítima e segurança técnica adequada.</p>
 
             <h2 className="font-display text-2xl text-ink mt-12">Encarregado pelo tratamento de dados</h2>
             <p>Para exercer seus direitos como titular ou esclarecer dúvidas sobre o tratamento dos seus dados:</p>

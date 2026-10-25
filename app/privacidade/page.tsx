@@ -16,7 +16,7 @@ export default function PrivacyPage() {
             <p>Esta política descreve como tratamos as informações coletadas por meio deste site, em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018).</p>
 
             <h2 className="font-display text-2xl text-ink mt-12">1. Dados coletados</h2>
-            <p>Coletamos apenas informações fornecidas voluntariamente — nome, contato e mensagens enviadas pelos canais oficiais (WhatsApp, e-mail, formulários). Dados de navegação podem ser coletados para fins estatísticos e de melhoria do site.</p>
+            <p>Coletamos apenas informações fornecidas voluntariamente, como nome, contato e mensagens enviadas pelos canais oficiais (WhatsApp, e-mail, formulários). Dados de navegação podem ser coletados para fins estatísticos e de melhoria do site.</p>
 
             <h2 className="font-display text-2xl text-ink mt-12">2. Finalidade</h2>
             <p>Os dados são utilizados exclusivamente para responder solicitações, organizar agendamentos e prestar o serviço médico contratado, respeitando o sigilo profissional.</p>

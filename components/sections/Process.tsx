@@ -47,7 +47,7 @@ export function Process() {
                 <div key={m.label} className="flex items-baseline gap-3">
                   <span className="w-1 h-1 rounded-full bg-terracotta" />
                   <span className="font-display text-lg text-ink">{m.label}</span>
-                  <span className="text-sm text-ash">— {m.value}</span>
+                  <span className="text-sm text-ash">{m.value}</span>
                 </div>
               ))}
             </div>

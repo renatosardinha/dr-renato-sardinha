@@ -85,7 +85,7 @@ export default async function PacienteDetalhe({ params, searchParams }: {
             <option value="outro">Outro</option>
           </select>
         </div>
-        <div><label className={rotulo}>Título (ex.: Bioimpedância — out/2026)</label><input name="titulo" required className={campo} /></div>
+        <div><label className={rotulo}>Título (ex.: Bioimpedância, out/2026)</label><input name="titulo" required className={campo} /></div>
         <div><label className={rotulo}>Data do documento (opcional)</label><input name="data_documento" type="date" className={campo} /></div>
         <div><label className={rotulo}>Arquivo (PDF, JPG ou PNG, até 4 MB)</label>
           <input name="arquivo" type="file" accept="application/pdf,image/jpeg,image/png" required className="text-sm" /></div>

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Dr. Renato Sardinha — Medicina com evidência. Cuidado com presença.",
+    "title": "Dr. Renato Sardinha | Medicina com evidência. Cuidado com presença.",
     "description": "Acompanhamento médico integrativo baseado em evidência. Nutrologia esportiva, saúde mental e cuidado individualizado em São José do Rio Preto, SP.",
     "siteUrl": "https://drrenatosardinha.com.br",
     "ogImage": "/images/og.jpg",
@@ -41,7 +41,7 @@
   "hero": {
     "eyebrow": "Medicina integrativa baseada em evidência",
     "headline": "Saúde com evidência.\nCuidado com *presença*.",
-    "subheadline": "Acompanhamento médico que considera o paciente por inteiro — não em fragmentos. Critério científico, escuta atenta e decisões clínicas construídas com você.",
+    "subheadline": "Acompanhamento médico que considera o paciente por inteiro, e não em fragmentos. Critério científico, escuta atenta e decisões clínicas construídas com você.",
     "primaryCta": { "label": "Agendar pelo WhatsApp", "href": "https://wa.me/5517997672746" },
     "secondaryCta": { "label": "Conhecer o acompanhamento", "href": "#acompanhamento" },
     "image": "/images/portrait.jpg",
@@ -51,11 +51,11 @@
   "about": {
     "eyebrow": "Filosofia clínica",
     "title": "Cuidar é um ato de *critério*.",
-    "lead": "Acredito em uma medicina que respeita a complexidade de quem chega ao consultório. Não há protocolo universal — há pessoa, contexto e tempo.",
+    "lead": "Acredito em uma medicina que respeita a complexidade de quem chega ao consultório. Não há protocolo universal: há pessoa, contexto e tempo.",
     "paragraphs": [
       "Sou médico formado pela UNIUBE, com pós-graduação em Nutrologia Esportiva e formação em curso em Psiquiatria e Prática Baseada em Evidência. Meu trabalho se constrói no encontro entre ciência rigorosa e cuidado próximo.",
-      "Conduzo um consultório integrativo, no qual nutrição, atividade física, sono, saúde mental e farmacologia são pensados como peças de um mesmo desenho — não como especialidades isoladas. Cada decisão clínica é discutida abertamente, com riscos, benefícios e alternativas postos à mesa.",
-      "Recuso promessas. Trabalho com critério, leitura crítica da literatura e individualização real. O que ofereço é presença clínica — e a disciplina de quem trata cada paciente como caso único."
+      "Conduzo um consultório integrativo, no qual nutrição, atividade física, sono, saúde mental e farmacologia são pensados como peças de um mesmo desenho, e não como especialidades isoladas. Cada decisão clínica é discutida abertamente, com riscos, benefícios e alternativas postos à mesa.",
+      "Recuso promessas. Trabalho com critério, leitura crítica da literatura e individualização real. O que ofereço é presença clínica e a disciplina de quem trata cada paciente como caso único."
     ],
     "credentials": [
       { "label": "Formação",     "value": "Medicina · UNIUBE (2018)" },
@@ -70,12 +70,12 @@
   "process": {
     "eyebrow": "Como funciona",
     "title": "Um acompanhamento construído em *camadas*.",
-    "lead": "Cada etapa existe por uma razão clínica — e respeita o tempo de quem está sendo cuidado.",
+    "lead": "Cada etapa existe por uma razão clínica e respeita o tempo de quem está sendo cuidado.",
     "steps": [
       {
         "n": "01",
         "title": "Primeira consulta",
-        "body": "Encontro extenso de escuta e avaliação clínica. Histórico, queixas, contexto de vida, exames prévios. É o momento em que o caso é desenhado — sem pressa."
+        "body": "Encontro extenso de escuta e avaliação clínica. Histórico, queixas, contexto de vida, exames prévios. É o momento em que o caso é desenhado, sem pressa."
       },
       {
         "n": "02",
@@ -85,12 +85,12 @@
       {
         "n": "03",
         "title": "Acompanhamento contínuo",
-        "body": "Retornos programados, ajustes finos e canal direto para dúvidas relevantes. Acompanhamento não é uma sequência de consultas — é uma relação clínica sustentada no tempo."
+        "body": "Retornos programados, ajustes finos e canal direto para dúvidas relevantes. Acompanhamento não é uma sequência de consultas, é uma relação clínica sustentada no tempo."
       },
       {
         "n": "04",
         "title": "Decisões compartilhadas",
-        "body": "Cada conduta é discutida abertamente. Você sai do consultório entendendo o porquê de cada escolha — e com autonomia para participar dela."
+        "body": "Cada conduta é discutida abertamente. Você sai do consultório entendendo o porquê de cada escolha e com autonomia para participar dela."
       }
     ],
     "modalities": [
@@ -102,11 +102,11 @@
   "audience": {
     "eyebrow": "Para quem é",
     "title": "Para quem busca cuidado com *critério*.",
-    "lead": "Este acompanhamento foi pensado para pessoas que valorizam tempo, escuta e ciência — e que recusam atalhos.",
+    "lead": "Este acompanhamento foi pensado para pessoas que valorizam tempo, escuta e ciência, e que recusam atalhos.",
     "items": [
       {
         "title": "Quem deseja uma visão integrada",
-        "body": "Pessoas cansadas de pareceres fragmentados, que querem um médico que pense o conjunto — corpo, mente, rotina e contexto."
+        "body": "Pessoas cansadas de pareceres fragmentados, que querem um médico que pense o conjunto: corpo, mente, rotina e contexto."
       },
       {
         "title": "Quem prioriza evidência",
@@ -118,7 +118,7 @@
       },
       {
         "title": "Quem precisa de suporte em saúde mental",
-        "body": "Pacientes com demandas em ansiedade, humor, sono e sofrimento contemporâneo — com cuidado farmacológico criterioso e encaminhamento psicoterápico quando indicado."
+        "body": "Pacientes com demandas em ansiedade, humor, sono e sofrimento contemporâneo, com cuidado farmacológico criterioso e encaminhamento psicoterápico quando indicado."
       }
     ]
   },
@@ -127,10 +127,10 @@
     "eyebrow": "O que distingue",
     "title": "Critério antes de *conduta*.",
     "items": [
-      { "title": "Medicina baseada em evidência",   "body": "Cada decisão clínica é fundamentada na melhor literatura disponível — não em modismos." },
+      { "title": "Medicina baseada em evidência",   "body": "Cada decisão clínica é fundamentada na melhor literatura disponível, e não em modismos." },
       { "title": "Individualização real",            "body": "Plano construído para o seu caso. Não há receita pronta, não há protocolo de vitrine." },
-      { "title": "Acompanhamento próximo",           "body": "Canal aberto para dúvidas relevantes e revisões frequentes — clínica é relação no tempo." },
-      { "title": "Pensamento crítico",               "body": "Discuto abertamente o que funciona, o que ainda é incerto e o que prefiro evitar — com transparência." },
+      { "title": "Acompanhamento próximo",           "body": "Canal aberto para dúvidas relevantes e revisões frequentes. Clínica é relação no tempo." },
+      { "title": "Pensamento crítico",               "body": "Discuto abertamente o que funciona, o que ainda é incerto e o que prefiro evitar, com transparência." },
       { "title": "Cuidado integrativo",              "body": "Nutrição, movimento, sono, saúde mental e farmacologia pensados como um desenho único." },
       { "title": "Ética clínica",                    "body": "Sem promessas, sem milagres, sem venda de protocolos. Saúde não comporta atalhos." }
     ]
@@ -169,7 +169,7 @@
     "items": [
       {
         "q": "Como funciona a primeira consulta?",
-        "a": "É um encontro extenso — em média entre 60 e 90 minutos — voltado a entender você por inteiro: histórico, queixas, exames prévios, rotina, contexto. Saímos com um plano inicial e os próximos passos definidos."
+        "a": "É um encontro extenso, em média entre 60 e 90 minutos, voltado a entender você por inteiro: histórico, queixas, exames prévios, rotina, contexto. Saímos com um plano inicial e os próximos passos definidos."
       },
       {
         "q": "Qual a duração do acompanhamento?",
