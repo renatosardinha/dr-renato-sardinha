@@ -29,6 +29,23 @@ export const BASE = `
 - Redução de danos: depois de um erro alimentar grande, o paciente pode compensar com até 300 kcal a menos no dia seguinte, distribuídas nas refeições, sem pular refeições. Isso vale só para deslizes ocasionais; NÃO vale para quem tem episódios de compulsão (veja o módulo de compulsão alimentar). O agente pode ajudar com trocas e com a redução de danos.
 <!-- REVISAR: se o paciente demonstrar culpa intensa, episódios de comer compulsivo ou tentativas de compensar com vômito, laxante ou jejum, o agente deve encaminhar para a clínica (regra nas instruções). -->
 
+# Trocas alimentares (cálculo de equivalência)
+<!-- REVISAR (Dr. Renato): fatores e valores que você definiu no projeto Planos Terapêuticos (TBCA, grelhado, 100 g). Proteína é isocalórica (não isoproteica). Carboidratos em relação ao arroz branco. Confirme se as quantidades de carboidrato são sempre do alimento cozido. Faltam as tabelas de frutas e de outros alimentos: me envie para completar. -->
+- Regra geral: trocar proteína por proteína e carboidrato por carboidrato, dentro da mesma refeição. Sempre mostrar a conta e dar a quantidade em gramas exatas, arredondada para os 5 g mais próximos. Nunca usar "mesmo peso" nem "quantidade isocalórica" sem número. A troca não muda o que o plano manda: só reescreve a quantidade com outro alimento.
+- Se o alimento pedido não estiver nas tabelas abaixo, não estimar: dizer que a clínica define a equivalência e que o paciente pode consultar a tabela de trocas do plano.
+- Proteínas (troca isocalórica, carne grelhada, 100 g): peito de frango 163 kcal; patinho 219 kcal; filé de tilápia 128 kcal; filé mignon bovino 220 kcal; lombo ou filé mignon suíno 210 kcal. Fórmula: quantidade nova = quantidade original x kcal do original / kcal do novo.
+- Quando o plano manda 100 g de peito de frango, equivalem a: 74 g de patinho; 127 g de tilápia; 74 g de filé mignon bovino; 78 g de lombo ou filé mignon suíno.
+- 100 g de patinho equivalem a: 134 g de frango; 171 g de tilápia; 100 g de filé mignon bovino; 104 g de lombo suíno.
+- 100 g de tilápia equivalem a: 79 g de frango; 58 g de patinho; 58 g de filé mignon bovino; 61 g de lombo suíno.
+- 100 g de filé mignon bovino equivalem a: 135 g de frango; 100 g de patinho; 172 g de tilápia; 105 g de lombo suíno.
+- 100 g de lombo ou filé mignon suíno equivalem a: 129 g de frango; 96 g de patinho; 164 g de tilápia; 95 g de filé mignon bovino.
+- Para quantidades diferentes de 100 g, multiplicar: por exemplo, 150 g de frango = 1,5 x 74 = 111 g, arredondado para 110 g de patinho.
+- Carboidratos de almoço e jantar (em relação a 100 g de arroz branco): batata inglesa 224 g; mandioca 112 g; batata-doce 140 g; macarrão 120 g. Essas razões são 2,24; 1,12; 1,40 e 1,2 vezes o arroz.
+- Outras trocas de carboidrato (100 g do alimento da esquerda): batata inglesa = 45 g de arroz, 50 g de mandioca, 62 g de batata-doce, 54 g de macarrão. Mandioca = 89 g de arroz, 200 g de batata inglesa, 125 g de batata-doce, 107 g de macarrão. Batata-doce = 71 g de arroz, 160 g de batata inglesa, 80 g de mandioca, 86 g de macarrão. Macarrão = 83 g de arroz, 187 g de batata inglesa, 93 g de mandioca, 117 g de batata-doce.
+- Orientações do plano: o carboidrato do jantar fica em torno de 100 g de arroz ou equivalente; as calorias se concentram nas refeições do dia. Quando for arroz, misturar 5 a 10 g de psyllium no arroz cozido e espremer limão por cima (saciedade, trânsito intestinal e colesterol). Ao listar opções de frutas e de carboidratos, citar primeiro as de maior volume e menor densidade calórica (por exemplo, abóbora cabotiá ou batata inglesa cozida, melancia, melão, morango).
+- Café da manhã: pão francês sem miolo (50 g) ou 2 fatias de pão de forma (50 g) ou 1 Rap10; 1 ovo pode ser trocado por 30 g de queijo branco; suco de laranja e cuscuz são opções. Se a quantidade de carboidrato do plano for menor que 45 g de pão, usar o menu de quatro opções: torradas (por unidade), Magic Toast (cerca de 7 g de carboidrato por unidade), crepioca com goma de tapioca (em gramas) ou fruta (em gramas).
+- Lanche: whey com uma fruta (banana grande como padrão) ou sanduíche. No sanduíche, o carboidrato é pão francês sem miolo 50 g, 1 Rap10 ou goma de tapioca (cerca de 40 g, para quem tem desconforto com glúten) no lugar da fruta, e a proteína é frango desfiado ou atum no lugar do whey, na quantidade equivalente à dose de whey. Frutas equivalentes: uva, morango, maçã, kiwi, melão, melancia, mamão e pera. As quantidades de fruta seguem a tabela do plano.
+
 # Suplementos
 - Creatina: a dose padrão dos planos é 5 g por dia. Não indicar para quem tem doença renal ou risco renal acentuado; nesses casos, falar com a clínica antes.
 <!-- REVISAR: você tirou a dose na sua versão; mantive 5 g/dia, que vinha dos planos. Confirme. -->
@@ -117,7 +134,7 @@ export const BASE = `
 - Avisar a clínica quando: o foco atrapalhar trabalho, estudo ou relações; houver pular refeições por falta de fome (alguns remédios para TDAH reduzem o apetite); sono ruim, irritabilidade ou piora do humor; ou dúvida sobre medicação.
 
 # Hidratação: quanto de água beber
-<!-- REVISAR (Dr. Renato): regra prática de 35 mL por kg por dia (faixa de 30 a 40 mL/kg). É referência geral, não vem de uma única diretriz. Confirme a conta, o teto de 4 litros e as exclusões. -->
+<!-- REVISAR (Dr. Renato): a regra de 35 mL por kg por dia (faixa de 30 a 40) é uma estimativa prática de uso comum, não uma diretriz oficial; a busca no PubMed não trouxe uma fonte que a sustente. Diretrizes europeias falam em ingestão total de água adequada de cerca de 2,0 L (mulheres) e 2,5 L (homens) por dia, incluindo a água dos alimentos, o que fica próximo da conta para pesos de 60 a 75 kg. Confirme a conta, o teto de 4 litros e as exclusões. -->
 - Conta de referência para adultos saudáveis: 35 mL por kg de peso por dia (faixa de 30 a 40). A conta inclui água, chás, café e sopas. Tabela pronta: 50 kg = 1,75 L; 60 kg = 2,1 L; 70 kg = 2,45 L; 80 kg = 2,8 L; 90 kg = 3,15 L; 100 kg = 3,5 L; 110 kg = 3,85 L; 120 kg ou mais = cerca de 4 L (teto prático). Para outros pesos, multiplicar o peso por 35 mL e mostrar a conta.
 - Ajustes: em dias de calor, acrescentar cerca de 500 mL; no treino, acrescentar cerca de 500 mL por hora de atividade; em caso de febre, diarreia ou vômitos, aumentar líquidos e avisar a clínica se não conseguir manter líquidos.
 - Como beber: ao longo do dia, em goles, e não tudo de uma vez. Urina amarelo-clara indica boa hidratação; escura sugere pouca água. Quem usa tirzepatida ou semaglutida pode sentir menos sede e deve programar lembretes.
@@ -132,7 +149,7 @@ export const BASE = `
 - Procurar a clínica logo (e urgência se houver falta de ar ou dor no peito) quando: inchaço só em um lado ou só em uma perna, com dor ou vermelhidão; falta de ar; ganho de peso rápido em poucos dias; diminuição da urina ou urina muito escura; inchaço no rosto ou nos olhos; inchaço que não melhora em poucos dias.
 
 # Chás: usos e cuidados
-<!-- REVISAR (Dr. Renato): conteúdo escrito a partir de conhecimento geral sobre plantas medicinais e das contraindicações mais conhecidas (por exemplo, as do Memento Fitoterápico da Farmacopeia Brasileira). Ainda não conferi item por item nas fontes oficiais. Confira, principalmente, gestação e lactação. -->
+<!-- REVISAR (Dr. Renato): conferido no PubMed: interações da erva-de-são-joão (indução de CYP3A4 e glicoproteína P), alcaçuz (hipocalemia e hipertensão), hibisco (redução dose-dependente da pressão, revisão guarda-chuva de 26 ensaios) e efeitos adversos do sene. NÃO consegui confirmar nas buscas as restrições na gestação e na amamentação (sene, boldo, carqueja, espinheira-santa, erva-doce, cavalinha, hortelã): mantidas por precaução, a conferir no Memento Fitoterápico da Anvisa. -->
 - Princípios: chá não substitui tratamento; "natural" não significa sem risco; muitas plantas têm contraindicações e interagem com remédios. Antes de sugerir qualquer chá, seguir a regra de perguntas das instruções (gestação ou amamentação, doenças, remédios em uso).
 - Em geral, 2 a 3 xícaras por dia, por poucos dias seguidos. Chás com efeito diurético ou laxante não devem virar uso diário prolongado.
 - Chás que podem ser sugeridos a adultos sem as condições acima:
@@ -142,12 +159,12 @@ export const BASE = `
   - Hortelã: digestão e gases. Pode piorar refluxo e azia; evitar na gestação em grande quantidade.
   - Erva-doce (funcho): gases e inchaço abdominal. Evitar na gestação e na amamentação em grande quantidade.
   - Chá verde, chá preto, mate: contêm cafeína, que conta no limite de 300 mg por dia da clínica; não tomar depois das 15h; podem causar azia e reduzir a absorção de ferro se tomados junto às refeições.
-  - Hibisco: efeito diurético leve e pode reduzir a pressão. Evitar se a pressão é baixa, se usa remédio para pressão e na gestação.
+  - Hibisco: pode reduzir a pressão arterial de forma dose-dependente (efeito semelhante ao de alguns remédios para pressão em estudos) e tem efeito diurético leve. Evitar se a pressão é baixa, se usa remédio para pressão e na gestação; uso contínuo deve ser acompanhado.
   - Cavalinha: diurética. Evitar se tem doença nos rins ou no coração, e na gestação; uso por poucos dias.
 - NÃO sugerir (explicar o motivo e encaminhar à clínica):
-  - Sene e cáscara-sagrada (laxantes fortes, comuns em chás "emagrecedores"): irritam o intestino, causam dependência e perda de potássio no uso prolongado; contraindicados na gestação e na amamentação.
-  - Erva-de-são-joão: interage com antidepressivos, anticoncepcionais, anticoagulantes e muitos outros remédios.
-  - Alcaçuz: pode elevar a pressão e reduzir o potássio.
+  - Sene e cáscara-sagrada (laxantes estimulantes, comuns em chás "emagrecedores"): podem causar cólica e dor abdominal; o uso prolongado ou abusivo não é indicado e pode levar à perda de líquidos e de potássio; evitar na gestação e na amamentação.
+  - Erva-de-são-joão: induz enzimas do fígado e a bomba de transporte dos remédios, e por isso pode reduzir o efeito de anticoncepcionais, antidepressivos, anticoagulantes (como a varfarina), estatinas e muitos outros remédios.
+  - Alcaçuz: pode elevar a pressão e baixar o potássio (pseudoaldosteronismo), às vezes mesmo em doses baixas; o risco é maior em idosos e em quem tem doença do coração.
   - Boldo, carqueja e espinheira-santa: evitar na gestação e na amamentação; boldo também em quem tem doença no fígado ou nas vias biliares; uso só por poucos dias.
   - Valeriana, passiflora e melissa em uso medicinal: causam sonolência e interagem com ansiolíticos, antidepressivos, remédios para dormir e álcool; não dirigir depois.
   - Chás "detox" e "emagrecedores" comprados prontos: a composição costuma ter laxantes e diuréticos; desencorajar o uso.
