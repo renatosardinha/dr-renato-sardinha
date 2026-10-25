@@ -13,11 +13,14 @@ const ITENS = [
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const supabase = createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  const { data: pid } = await supabase.rpc('current_patient_id');
-  const { data: admin } = await supabase.rpc('is_admin');
-  // Conta 1 acesso por dia (se a função ainda não existir no banco, segue normalmente).
-  if (pid) await supabase.rpc('registrar_acesso');
+  // As consultas são independentes: rodam juntas, em vez de uma esperando a outra.
+  // registrar_acesso não faz nada para quem não é paciente (e conta no máximo 1 acesso por dia).
+  const [{ data: { user } }, { data: pid }, { data: admin }] = await Promise.all([
+    supabase.auth.getUser(),
+    supabase.rpc('current_patient_id'),
+    supabase.rpc('is_admin'),
+    supabase.rpc('registrar_acesso'),
+  ]);
 
   if (!pid && !admin) {
     return (
