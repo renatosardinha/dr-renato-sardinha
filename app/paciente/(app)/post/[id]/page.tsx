@@ -31,23 +31,22 @@ export default async function Post({ params }: { params: { id: string } }) {
   return (
     <article>
       <Link href="/paciente" className="mb-3 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-graphite">
-        <ArrowLeft className="h-4 w-4" /> Voltar ao feed
+        <ArrowLeft className="h-4 w-4" /> Voltar
       </Link>
       <div className="rounded-[18px] border border-mist bg-ivory px-4 pb-2 pt-3">
         <PostCabecalho data={p.publicado_em} />
         <h1 className="mt-3 font-display text-2xl leading-snug">{p.titulo}</h1>
-        {p.corpo && <p className="mt-3 whitespace-pre-line text-base leading-relaxed text-graphite">{p.corpo}</p>}
-
+        {imagem && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={imagem} alt="" className="mt-4 w-full rounded-lg border border-mist" />
+        )}
         {embed && (
           <div className="mt-4 aspect-video w-full overflow-hidden rounded-lg border border-mist bg-ink">
             <iframe src={embed} title={p.titulo} className="h-full w-full" loading="lazy"
               allow="autoplay; fullscreen; picture-in-picture" allowFullScreen referrerPolicy="strict-origin-when-cross-origin" />
           </div>
         )}
-        {!embed && imagem && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={imagem} alt="" className="mt-4 w-full rounded-lg border border-mist" />
-        )}
+        {p.corpo && <p className="mt-4 whitespace-pre-line text-base leading-relaxed text-graphite">{p.corpo}</p>}
         <div className="mt-2">{podeCurtir && <LikeButton postId={p.id} total={c ? Number(c.total) : 0} curtiu={c?.curti ?? false} />}</div>
       </div>
     </article>
