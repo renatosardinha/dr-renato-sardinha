@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
-import { videoEmbedUrl } from '@/lib/video';
+import { videoEmbedUrl, extrairLinkVideo } from '@/lib/video';
 
 const BASE = '/paciente/admin';
 
@@ -105,7 +105,7 @@ export async function publicarPost(formData: FormData) {
   const titulo = String(formData.get('titulo') ?? '').trim();
   const corpo = String(formData.get('corpo') ?? '').trim() || null;
   const imagem = formData.get('imagem');
-  const video_url = String(formData.get('video_url') ?? '').trim() || null;
+  const video_url = extrairLinkVideo(String(formData.get('video_url') ?? ''));
   if (!titulo) voltar(base, 'erro', 'Informe o título.');
   if (video_url && !videoEmbedUrl(video_url)) {
     voltar(base, 'erro', 'Link de vídeo não reconhecido. Use um link do Vimeo, Bunny Stream ou YouTube.');
@@ -134,7 +134,7 @@ export async function atualizarPost(formData: FormData) {
   const base = `${BASE}/publicacoes/${id}`;
   const titulo = String(formData.get('titulo') ?? '').trim();
   const corpo = String(formData.get('corpo') ?? '').trim() || null;
-  const video_url = String(formData.get('video_url') ?? '').trim() || null;
+  const video_url = extrairLinkVideo(String(formData.get('video_url') ?? ''));
   const publicado = formData.get('publicado') === 'on';
   const removerImagem = formData.get('remover_imagem') === 'on';
   const imagem = formData.get('imagem');
