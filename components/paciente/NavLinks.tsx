@@ -29,7 +29,7 @@ import { Home, FileText, MessageCircleQuestion, Store, type LucideIcon } from 'l
 const ICONES: Record<string, LucideIcon> = { feed: Home, documentos: FileText, duvidas: MessageCircleQuestion, indicacoes: Store };
 export type PacienteItem = NavItem & { icone: keyof typeof ICONES };
 
-/** Menu do paciente: faixa lateral só com ícones (computador) e barra fixa embaixo (celular). */
+/** Menu do paciente: faixa lateral só com ícones (computador) e abas fixas no topo, abaixo do cabeçalho (celular). */
 export function PacienteTabs({ items }: { items: PacienteItem[] }) {
   const pathname = usePathname();
   return (
@@ -51,15 +51,16 @@ export function PacienteTabs({ items }: { items: PacienteItem[] }) {
           );
         })}
       </nav>
-      <nav className="fixed inset-x-0 bottom-0 z-20 flex justify-around border-t border-mist bg-ivory pb-[env(safe-area-inset-bottom)] md:hidden" aria-label="Menu">
+      <nav className="sticky top-14 z-10 flex border-b border-mist bg-ivory md:hidden" aria-label="Menu">
         {items.map((i) => {
           const Icone = ICONES[i.icone];
           const on = ativo(pathname, i);
           return (
             <Link key={i.href} href={i.href} aria-current={on ? 'page' : undefined}
-              className={`flex flex-1 flex-col items-center gap-1 py-2.5 text-xs ${on ? 'font-semibold text-ink' : 'text-ash'}`}>
-              <Icone strokeWidth={on ? 1.8 : 1.5} className={`h-6 w-6 ${on ? 'stroke-ink' : 'stroke-ash'}`} />
+              className={`relative flex min-h-[52px] flex-1 flex-col items-center justify-center gap-0.5 text-xs ${on ? 'font-semibold text-ink' : 'text-ash'}`}>
+              <Icone strokeWidth={on ? 1.8 : 1.5} className={`h-5 w-5 ${on ? 'stroke-ink' : 'stroke-ash'}`} />
               {i.label}
+              {on && <span className="absolute inset-x-4 bottom-0 h-0.5 bg-ink" />}
             </Link>
           );
         })}

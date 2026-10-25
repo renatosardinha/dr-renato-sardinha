@@ -42,7 +42,6 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 
   return (
     <div className="min-h-screen md:pl-20">
-      <PacienteTabs items={ITENS} />
       <header className="sticky top-0 z-10 border-b border-mist bg-ivory">
         <div className="mx-auto flex h-14 max-w-[600px] items-center justify-between gap-3 px-4">
           <div className="min-w-0">
@@ -57,7 +56,8 @@ export default async function AppLayout({ children }: { children: React.ReactNod
           </div>
         </div>
       </header>
-      <main className="mx-auto max-w-[600px] px-4 pb-28 pt-4 md:pb-10">{children}</main>
+      <PacienteTabs items={ITENS} />
+      <main className="mx-auto max-w-[600px] px-4 pb-10 pt-4">{children}</main>
     </div>
   );
 }
