@@ -49,7 +49,7 @@ export default async function EditarPublicacao({ params, searchParams }: {
 
         <div>
           <label className={rotulo}>Link do vídeo (opcional)</label>
-          <input name="video_url" type="url" defaultValue={p.video_url ?? ''} placeholder="https://vimeo.com/…" className={campo} />
+          <input name="video_url" type="text" defaultValue={p.video_url ?? ''} placeholder="https://vimeo.com/…" className={campo} />
         </div>
 
         <label className="flex items-center gap-2 text-sm text-graphite">

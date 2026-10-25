@@ -32,7 +32,7 @@ export default async function Publicacoes({ searchParams }: { searchParams: { ok
           <input name="imagem" type="file" accept="image/jpeg,image/png,image/webp" className="text-sm" /></div>
         <div>
           <label className={rotulo}>Link do vídeo (opcional)</label>
-          <input name="video_url" type="url" placeholder="https://vimeo.com/… ou link do Bunny/YouTube" className={campo} />
+          <input name="video_url" type="text" placeholder="https://vimeo.com/… ou link do Bunny/YouTube" className={campo} />
           <p className="mt-1 text-xs text-ash">
             Atenção: vídeo “não listado” do YouTube não é privado — quem tiver o link assiste. Para conteúdo exclusivo, use Vimeo ou Bunny Stream.
           </p>
