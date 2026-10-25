@@ -26,7 +26,7 @@ export const BASE = `
 - A proteína é priorizada ao longo do dia.
 - Quem tem intolerância à lactose usa as opções sem lactose da tabela de trocas.
 - Em dias fora do planejado, retomar o plano na refeição seguinte, sem compensar pulando refeições e sem jejum.
-- Redução de danos: depois de um erro alimentar grande, o paciente pode compensar com até 300 kcal a menos no dia seguinte, distribuídas nas refeições, sem pular refeições. O agente pode ajudar com trocas e com a redução de danos.
+- Redução de danos: depois de um erro alimentar grande, o paciente pode compensar com até 300 kcal a menos no dia seguinte, distribuídas nas refeições, sem pular refeições. Isso vale só para deslizes ocasionais; NÃO vale para quem tem episódios de compulsão (veja o módulo de compulsão alimentar). O agente pode ajudar com trocas e com a redução de danos.
 <!-- REVISAR: se o paciente demonstrar culpa intensa, episódios de comer compulsivo ou tentativas de compensar com vômito, laxante ou jejum, o agente deve encaminhar para a clínica (regra nas instruções). -->
 
 # Suplementos
@@ -87,6 +87,34 @@ export const BASE = `
 - Crise de pânico: o pico costuma durar poucos minutos e o desconforto, embora forte, passa. Evitar fugir do lugar, usar respiração lenta e aterramento. Se for a primeira crise, se as crises forem frequentes ou se houver dor no peito ou desmaio, procurar a clínica ou urgência.
 - O que piora a ansiedade: excesso de cafeína, álcool, pouco sono e pular refeições. Orientar reduzir.
 - Avisar a clínica quando: os sintomas passam de 2 semanas, atrapalham trabalho, sono ou relações, as crises de pânico se repetem, há uso de álcool ou outras substâncias para lidar, desesperança, ou piora depois de mudar algum remédio.
+
+# Compulsão alimentar e "perder o controle" (apoio entre consultas)
+<!-- REVISAR (Dr. Renato): módulo de apoio baseado em princípios da TCC para compulsão (alimentação regular, sem restrição nem compensação, adiar a vontade, registro de gatilhos). Não substitui avaliação. Vômito, laxante, jejum ou exercício como compensação, culpa intensa ou episódios frequentes: o agente acolhe e encaminha, sem dar dicas. -->
+- Como o agente deve agir: acolher sem julgar ("isso acontece e não apaga o seu progresso"), nunca sugerir castigo, jejum, compensação ou "começar de novo na segunda", e lembrar que, se os episódios continuarem, o paciente deve falar com a clínica.
+- O que é: comer uma quantidade grande em pouco tempo, com sensação de perder o controle. Costuma aparecer depois de muita restrição, estresse, tédio, emoções difíceis, pouco sono ou álcool. O ciclo comum é: restringir, ficar com muita fome, ter o episódio, sentir culpa e restringir de novo. Quebrar o ciclo começa por comer com regularidade.
+- 1) Comer regularmente: refeições a cada 3 a 4 horas, sem pular, com proteína e fibra em cada uma. Fome extrema aumenta muito a chance de episódio.
+- 2) Não compensar: sem jejum, sem vômito, sem laxante e sem treino de castigo. Depois de um episódio, a próxima refeição é normal, no horário. A redução de 300 kcal do dia seguinte NÃO vale para quem tem episódios de compulsão.
+- 3) Na hora da vontade, "surfar a onda": a vontade sobe, atinge um pico e perde força, em geral em cerca de 15 a 30 minutos. Passos: (a) parar e respirar devagar; (b) perguntar "é fome no corpo ou emoção?" (dar nota de 0 a 10 para a fome); (c) nomear a emoção (ansiedade, tédio, cansaço, tristeza); (d) adiar 15 minutos fazendo outra coisa (beber água, tomar um banho, caminhar, ligar para alguém); (e) depois decidir sem culpa. Se for comer, sentar, usar prato, sem tela e devagar.
+- 4) Ambiente: evitar deixar à vista os alimentos que mais disparam a vontade; usar porções prontas em vez de embalagem grande; ir ao mercado com lista e sem fome.
+- 5) Registro de gatilhos (TCC): anotar hora, o que comeu, onde, a emoção e o que aconteceu antes, sem julgar, para levar à consulta.
+- 6) Pensamento de tudo ou nada: trocar "estraguei o dia" por "um episódio não define o meu dia; a próxima refeição é uma nova chance".
+- 7) Sono e estresse: dormir bem e ter momentos de descanso reduzem a vontade; álcool aumenta a chance de episódio.
+- Avisar a clínica sempre que: houver episódios uma vez por semana ou mais, culpa ou vergonha intensas, comer escondido, tristeza importante, ou uso de remédio para emagrecer junto com compulsão. Se houver vômito provocado, laxante, jejum ou exercício como compensação, não dar nenhuma dica de compensação: acolher e encaminhar à clínica com prioridade.
+
+# Foco e organização (TDAH): apoio no dia a dia
+<!-- REVISAR (Dr. Renato): estratégias práticas de organização para quem tem TDAH ou dificuldade de foco. Sem diagnóstico e sem orientação de medicação. Medicamentos para TDAH podem reduzir a fome: o agente só pede que o paciente avise a clínica se estiver deixando de comer. -->
+- Como o agente deve agir: acolher ("dificuldade de foco não é falta de vontade"), ensinar uma ou duas estratégias por vez e, se o foco continuar atrapalhando trabalho, estudo, sono ou alimentação, orientar falar com a clínica. Não diagnosticar e não orientar remédios (dose, horário ou troca).
+- 1) Tirar da cabeça: colocar alarmes no celular para refeições, água e suplementos; deixar lembretes visíveis (bilhete na geladeira, copo de água na mesa de trabalho).
+- 2) Ancorar o hábito: ligar o hábito novo a um que já existe (tomar a creatina junto com o café da manhã, misturar o psyllium no arroz do almoço).
+- 3) Passos pequenos: dividir a tarefa em partes de 2 a 5 minutos e começar pela menor ("só abrir a marmita", "só vestir o tênis").
+- 4) Blocos de foco: 25 minutos de foco com timer visível e 5 de pausa; deixar o celular em outro cômodo durante o bloco.
+- 5) Menos decisões: ter 2 ou 3 refeições padrão, marmitas prontas, uma lista de compras fixa e as trocas do plano salvas no celular; ter uma versão "mínima" do plano para dias corridos.
+- 6) Parceiro de responsabilidade: fazer a tarefa junto com alguém (presencial ou por chamada) ou combinar um aviso diário curto com uma pessoa de confiança.
+- 7) Recompensa imediata: marcar o hábito em um calendário ou aplicativo e comemorar cada pequena vitória; o cérebro com TDAH costuma responder melhor a recompensas rápidas do que a metas distantes.
+- 8) Recomeçar sem culpa: depois de uma falha, retomar na próxima refeição ou no próximo bloco, e não "na segunda". Evitar o pensamento de tudo ou nada.
+- 9) Impulsividade com comida: comer sentado, com prato e sem tela; ir ao mercado com lista e sem fome; evitar manter à vista alimentos que disparam a vontade.
+- 10) Sono, movimento e luz natural melhoram o foco.
+- Avisar a clínica quando: o foco atrapalhar trabalho, estudo ou relações; houver pular refeições por falta de fome (alguns remédios para TDAH reduzem o apetite); sono ruim, irritabilidade ou piora do humor; ou dúvida sobre medicação.
 
 # Hidratação: quanto de água beber
 <!-- REVISAR (Dr. Renato): regra prática de 35 mL por kg por dia (faixa de 30 a 40 mL/kg). É referência geral, não vem de uma única diretriz. Confirme a conta, o teto de 4 litros e as exclusões. -->
