@@ -6,12 +6,28 @@ import { Send } from 'lucide-react';
 type Msg = { role: 'user' | 'assistant'; content: string };
 
 /** Transforma endereços https:// em links clicáveis (só https). */
-function comLinks(texto: string) {
+function comLinks(texto: string, chave: string) {
   return texto.split(/(https:\/\/[^\s<>)]+)/g).map((parte, i) =>
     /^https:\/\//.test(parte)
-      ? <a key={i} href={parte} target="_blank" rel="noopener noreferrer" className="break-all underline text-terracotta-deep">{parte}</a>
+      ? <a key={`${chave}-${i}`} href={parte} target="_blank" rel="noopener noreferrer" className="break-all underline text-terracotta-deep">{parte}</a>
       : parte
   );
+}
+
+/**
+ * Mostra a resposta do assistente sem os símbolos de Markdown: **negrito** vira negrito de verdade,
+ * marcadores de lista viram "•", títulos (#) perdem o símbolo e asteriscos soltos somem.
+ * Não interpreta HTML, só texto (seguro).
+ */
+function formatar(texto: string) {
+  const limpo = texto
+    .replace(/^\s{0,3}#{1,6}\s+/gm, '')
+    .replace(/^\s*[*-]\s+/gm, '• ')
+    .replace(/__([^_]+)__/g, '**$1**');
+  return limpo.split(/(\*\*[^*]+\*\*)/g).map((parte, i) => {
+    if (/^\*\*[^*]+\*\*$/.test(parte)) return <strong key={i}>{comLinks(parte.slice(2, -2), `b${i}`)}</strong>;
+    return comLinks(parte.replace(/\*/g, ''), `t${i}`);
+  });
 }
 
 export function Chat() {
@@ -57,7 +73,7 @@ export function Chat() {
         {msgs.map((m, i) => (
           <div key={i} className={m.role === 'user' ? 'flex justify-end' : 'flex justify-start'}>
             <p className={`max-w-[85%] whitespace-pre-line rounded-[18px] px-4 py-3 text-[15px] leading-relaxed ${
-              m.role === 'user' ? 'bg-ink text-ivory' : 'border border-mist bg-ivory text-graphite'}`}>{m.role === 'assistant' ? comLinks(m.content) : m.content}</p>
+              m.role === 'user' ? 'bg-ink text-ivory' : 'border border-mist bg-ivory text-graphite'}`}>{m.role === 'assistant' ? formatar(m.content) : m.content}</p>
           </div>
         ))}
         {enviando && <p className="text-sm text-ash">Digitando…</p>}
@@ -65,7 +81,7 @@ export function Chat() {
         <div ref={fim} />
       </div>
 
-      <form onSubmit={enviar} className="sticky bottom-20 mt-4 flex gap-2 md:bottom-4">
+      <form onSubmit={enviar} className="sticky bottom-4 mt-4 flex gap-2">
         <input value={texto} onChange={(e) => setTexto(e.target.value)} maxLength={1000} placeholder="Escreva sua dúvida"
           className="min-w-0 flex-1 rounded-full border border-mist bg-ivory px-4 py-3 text-base outline-none focus:border-terracotta-deep" />
         <button disabled={enviando || !texto.trim()} aria-label="Enviar"
