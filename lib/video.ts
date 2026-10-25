@@ -27,9 +27,9 @@ export function videoEmbedUrl(raw: string | null | undefined): string | null {
     const h = u.pathname.match(/\/\d+\/([a-z0-9]+)/i); // vídeos com hash de privacidade
     return m ? `https://player.vimeo.com/video/${m[1]}${h ? `?h=${h[1]}` : ''}` : null;
   }
-  if (host === 'iframe.mediadelivery.net' && /^\/embed\/\d+\/[\w-]+/.test(u.pathname)) {
+  if ((host === 'iframe.mediadelivery.net' || host === 'player.mediadelivery.net') && /^\/(embed|play)\/\d+\/[\w-]+/.test(u.pathname)) {
     // Mantém só o caminho; sem autoplay, para o vídeo não tocar sozinho ao abrir o post.
-    return `https://iframe.mediadelivery.net${u.pathname}?autoplay=false&preload=false`;
+    return `https://${host}${u.pathname.replace(/^\/play\//, '/embed/')}?autoplay=false&preload=false`;
   }
   if (host === 'youtu.be') {
     const id = u.pathname.slice(1);
