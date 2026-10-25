@@ -70,7 +70,7 @@ export function About() {
             {/* Assinatura editorial — CRM numerado conforme Resolução CFM 2.336/2023 */}
             <Reveal delay={0.5}>
               <div className="mt-16 pt-8 border-t border-mist flex items-center justify-between">
-                <span className="font-display text-lg italic text-umber">— Dr. Renato Sardinha</span>
+                <span className="font-display text-lg italic text-umber">Dr. Renato Sardinha</span>
                 <span className="font-mono text-xs text-ash tracking-widest">MÉDICO · CRM-SP 205323</span>
               </div>
             </Reveal>

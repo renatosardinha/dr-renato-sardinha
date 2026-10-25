@@ -28,13 +28,13 @@ export default async function Publicacoes({ searchParams }: { searchParams: { ok
       <form action={publicarPost} className="mt-3 space-y-3">
         <div><label className={rotulo}>Título</label><input name="titulo" required className={campo} /></div>
         <div><label className={rotulo}>Texto</label><textarea name="corpo" rows={8} className={campo} /></div>
-        <div><label className={rotulo}>Imagem de capa (opcional — JPG, PNG ou WebP, até 4 MB)</label>
+        <div><label className={rotulo}>Imagem de capa (opcional: JPG, PNG ou WebP, até 4 MB)</label>
           <input name="imagem" type="file" accept="image/jpeg,image/png,image/webp" className="text-sm" /></div>
         <div>
           <label className={rotulo}>Link do vídeo (opcional)</label>
           <input name="video_url" type="text" placeholder="https://vimeo.com/… ou link do Bunny/YouTube" className={campo} />
           <p className="mt-1 text-xs text-ash">
-            Atenção: vídeo “não listado” do YouTube não é privado — quem tiver o link assiste. Para conteúdo exclusivo, use Vimeo ou Bunny Stream.
+            Atenção: vídeo “não listado” do YouTube não é privado: quem tiver o link assiste. Para conteúdo exclusivo, use Vimeo ou Bunny Stream.
           </p>
         </div>
         <button className={botao}>Publicar no feed</button>

@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Clínica RS — Área do paciente',
+    name: 'Clínica RS | Área do paciente',
     short_name: 'Clínica RS',
     description: 'Seus documentos e conteúdos do acompanhamento.',
     start_url: '/paciente',
