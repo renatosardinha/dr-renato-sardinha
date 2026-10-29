@@ -147,6 +147,26 @@ export function trocarAlimento(idOrigem: unknown, quantidade: unknown, idDestino
   };
 }
 
+/** Acha o alimento para um nome escrito livremente (plano colado). exato = nome idêntico ao da tabela. */
+export function resolverAlimento(nome: string): { id: string; nome: string; exato: boolean } | null {
+  const alvo = sem(nome).replace(/\s+/g, ' ').trim();
+  if (!alvo) return null;
+  const ex = BASE.find((a) => sem(a.nome) === alvo);
+  if (ex) return { id: ex.id, nome: ex.nome, exato: true };
+  // Grafias comuns que a TACO escreve de outro jeito.
+  const consulta = alvo.replace(/\b(mu[cs]+arela|mozzarela|muzzarela|mucarela|mussarela)\b/g, 'mozarela');
+  const r = buscarAlimento(consulta);
+  if (!r.ok || !r.opcoes?.length) return null;
+  // Evita cair em versões em pó ou desidratadas quando o nome escrito não as cita.
+  const quer = (t: string) => alvo.includes(t);
+  const penal = (n: string) => {
+    const x = sem(n);
+    return (/\bpo\b/.test(x) && !quer('po') ? 1 : 0) + (/desidratad|liofiliz/.test(x) && !quer('desidrat') ? 1 : 0);
+  };
+  const melhor = [...r.opcoes].sort((a, b) => penal(a.nome) - penal(b.nome))[0];
+  return { id: melhor.id, nome: melhor.nome, exato: false };
+}
+
 // ---------- Apoio ao "Meu plano" (o paciente troca itens do próprio plano) ----------
 const dados = (a: Alimento) => ({ id: a.id, nome: a.nome, tabela: tabela(a), kcal: a.kcal, carb: a.carb, prot: a.prot });
 
