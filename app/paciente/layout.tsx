@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function PacienteLayout({ children }: { children: React.ReactNode }) {
-  return <div className="min-h-screen bg-bone text-ink">{children}</div>;
+  return <div className="tema-vidro min-h-screen">{children}</div>;
 }
