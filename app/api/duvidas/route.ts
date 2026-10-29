@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { SISTEMA, triagem } from '@/lib/agente/regras';
+import { FERRAMENTAS, executarFerramenta } from '@/lib/agente/trocas';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 30;
@@ -58,38 +59,54 @@ export async function POST(req: Request) {
   // A primeira mensagem enviada ao modelo precisa ser do usuário.
   while (historico.length && historico[0].role !== 'user') historico.shift();
 
-  let resp: Response;
-  try {
-    resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        'x-api-key': (process.env.ANTHROPIC_API_KEY ?? '').replace(/\s+/g, ''),
-        'anthropic-version': '2023-06-01',
-      },
-      body: JSON.stringify({
-        model: MODELO,
-        max_tokens: 700,
-        system: [{ type: 'text', text: SISTEMA, cache_control: { type: 'ephemeral' } }],
-        messages: [...historico, { role: 'user', content: mensagem }],
-      }),
+  type Bloco = { type: string; text?: string; id?: string; name?: string; input?: unknown };
+  // Conversa enviada ao modelo. O modelo pode pedir a calculadora de trocas (até 4 vezes) antes de responder.
+  const conversa: { role: string; content: unknown }[] = [...historico, { role: 'user', content: mensagem }];
+  let blocos: Bloco[] = [];
+  for (let volta = 0; volta < 5; volta++) {
+    const ultima = volta === 4;
+    let resp: Response;
+    try {
+      resp = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'x-api-key': (process.env.ANTHROPIC_API_KEY ?? '').replace(/\s+/g, ''),
+          'anthropic-version': '2023-06-01',
+        },
+        body: JSON.stringify({
+          model: MODELO,
+          max_tokens: 700,
+          system: [{ type: 'text', text: SISTEMA, cache_control: { type: 'ephemeral' } }],
+          tools: FERRAMENTAS,
+          ...(ultima ? { tool_choice: { type: 'none' } } : {}),
+          messages: conversa,
+        }),
+      });
+    } catch (e) {
+      console.error('agente: falha ao chamar a API', e instanceof Error ? e.message : e);
+      return NextResponse.json({ erro: 'Não consegui responder agora. Tente de novo ou fale com a clínica.' }, { status: 502 });
+    }
+    if (!resp.ok) {
+      const txt = await resp.text();
+      let motivo = txt;
+      try { motivo = JSON.parse(txt)?.error?.message ?? txt; } catch { /* mantém o texto bruto */ }
+      console.error(`agente ${resp.status} MOTIVO: ${String(motivo).slice(0, 200)}`);
+      return NextResponse.json({ erro: 'Não consegui responder agora. Tente de novo ou fale com a clínica.' }, { status: 502 });
+    }
+    const dados = await resp.json();
+    blocos = (dados.content ?? []) as Bloco[];
+    if (dados.stop_reason !== 'tool_use' || ultima) break;
+    conversa.push({ role: 'assistant', content: blocos });
+    conversa.push({
+      role: 'user',
+      content: blocos.filter((b) => b.type === 'tool_use').map((b) => ({
+        type: 'tool_result', tool_use_id: b.id, content: executarFerramenta(String(b.name), b.input),
+      })),
     });
-  } catch (e) {
-    console.error('agente: falha ao chamar a API', e instanceof Error ? e.message : e);
-    return NextResponse.json({ erro: 'Não consegui responder agora. Tente de novo ou fale com a clínica.' }, { status: 502 });
-  }
-  if (!resp.ok) {
-    const txt = await resp.text();
-    let motivo = txt;
-    try { motivo = JSON.parse(txt)?.error?.message ?? txt; } catch { /* mantém o texto bruto */ }
-    console.error(`agente ${resp.status} MOTIVO: ${String(motivo).slice(0, 200)}`);
-    return NextResponse.json({ erro: 'Não consegui responder agora. Tente de novo ou fale com a clínica.' }, { status: 502 });
   }
 
-  const dados = await resp.json();
-  const resposta: string = (dados.content ?? [])
-    .filter((c: { type: string }) => c.type === 'text')
-    .map((c: { text: string }) => c.text).join('\n').trim();
+  const resposta: string = blocos.filter((c) => c.type === 'text').map((c) => c.text ?? '').join('\n').trim();
   if (!resposta) return NextResponse.json({ erro: 'Não consegui responder agora. Fale com a clínica.' }, { status: 502 });
 
   await salvar(resposta, false);
