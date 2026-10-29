@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
-import { atualizarPaciente, enviarDocumento, removerDocumento } from '../../actions';
+import { atualizarPaciente, enviarDocumento, removerDocumento, removerEnvio } from '../../actions';
 import { Avisos } from '@/components/paciente/Avisos';
 import { campo, botao, rotulo } from '@/components/paciente/ui';
 
@@ -24,6 +24,9 @@ export default async function PacienteDetalhe({ params, searchParams }: {
     const { data } = await supabase.storage.from('documentos').createSignedUrl(d.storage_path, 300);
     return { ...d, url: data?.signedUrl };
   }));
+  const { data: envios } = await supabase.from('patient_uploads')
+    .select('id, tipo, nome_arquivo, observacao, visto_em, created_at').eq('patient_id', p.id)
+    .order('created_at', { ascending: false }).limit(100);
   const retorno = `/paciente/admin/pacientes/${p.id}`;
 
   return (
@@ -52,6 +55,31 @@ export default async function PacienteDetalhe({ params, searchParams }: {
         </label>
         <button className={botao}>Salvar</button>
       </form>
+
+      <h2 className="mt-12 font-display text-xl">Enviados pelo paciente</h2>
+      {(envios ?? []).length === 0 ? <p className="mt-3 text-ash">Nada enviado pelo paciente.</p> : (
+        <ul className="mt-3 divide-y divide-mist border-y border-mist">
+          {(envios ?? []).map((e) => (
+            <li key={e.id} className="flex items-center justify-between gap-3 py-3 text-sm">
+              <span>
+                <span className="text-ash">
+                  {TIPO[e.tipo] ?? 'Outro'} · {new Date(e.created_at).toLocaleDateString('pt-BR')}
+                  {!e.visto_em && <span className="ml-2 rounded-full bg-terracotta-deep px-2 py-0.5 text-xs font-semibold text-ivory">novo</span>}
+                </span><br />
+                {e.observacao || e.nome_arquivo}
+              </span>
+              <span className="flex items-center gap-4">
+                <a href={`/paciente/admin/arquivo/${e.id}`} target="_blank" rel="noopener noreferrer" className="underline text-terracotta">Abrir</a>
+                <form action={removerEnvio}>
+                  <input type="hidden" name="id" value={e.id} />
+                  <input type="hidden" name="retorno" value={retorno} />
+                  <button className="underline text-ash">Remover</button>
+                </form>
+              </span>
+            </li>
+          ))}
+        </ul>
+      )}
 
       <h2 className="mt-12 font-display text-xl">Documentos</h2>
       {links.length === 0 ? <p className="mt-3 text-ash">Nenhum documento enviado.</p> : (

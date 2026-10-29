@@ -98,6 +98,16 @@ export async function removerDocumento(formData: FormData) {
   voltar(base, 'ok', 'Documento removido.');
 }
 
+export async function removerEnvio(formData: FormData) {
+  const supabase = await exigirAdmin();
+  const id = String(formData.get('id') ?? '');
+  const base = destino(formData, `${BASE}/pacientes`);
+  const { data: envio } = await supabase.from('patient_uploads').select('storage_path').eq('id', id).maybeSingle();
+  if (envio?.storage_path) await supabase.storage.from('documentos').remove([envio.storage_path]);
+  await supabase.from('patient_uploads').delete().eq('id', id);
+  voltar(base, 'ok', 'Arquivo removido.');
+}
+
 // ---------- Feed ----------
 export async function publicarPost(formData: FormData) {
   const supabase = await exigirAdmin();
