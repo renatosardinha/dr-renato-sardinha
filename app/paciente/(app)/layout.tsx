@@ -42,14 +42,17 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 
   return (
     <div className="min-h-screen md:pl-20">
-      <header className="sticky top-0 z-10 border-b border-mist bg-ivory">
+      <header className="vidro sticky top-0 z-10 rounded-none border-x-0 border-t-0">
         <div className="mx-auto flex h-14 max-w-[600px] items-center justify-between gap-3 px-4">
-          <div className="min-w-0">
-            <p className="font-display text-lg leading-none">Clínica RS</p>
-            {nome && <p className="mt-1 truncate text-xs text-ash">Olá, {nome}</p>}
+          <div className="flex min-w-0 items-center gap-3">
+            <span className="grad-coral flex h-9 w-9 shrink-0 items-center justify-center rounded-[12px] font-display text-sm font-semibold text-white shadow-[0_4px_12px_rgba(196,67,31,0.35)]" aria-hidden>RS</span>
+            <div className="min-w-0">
+              <p className="font-display text-lg leading-none">Clínica RS</p>
+              {nome && <p className="mt-1 truncate text-xs text-ash">Olá, {nome}</p>}
+            </div>
           </div>
           <div className="flex items-center gap-2 text-sm font-semibold">
-            {admin && <Link href="/paciente/admin" className="rounded-full border border-mist px-4 py-2 text-terracotta-deep hover:bg-sand">Painel admin</Link>}
+            {admin && <Link href="/paciente/admin" className="cartao-vidro rounded-full px-4 py-2 text-terracotta-deep hover:bg-sand">Painel admin</Link>}
             <form action="/paciente/sair" method="post">
               <button className="rounded-full bg-ink px-4 py-2 text-ivory">Sair</button>
             </form>
