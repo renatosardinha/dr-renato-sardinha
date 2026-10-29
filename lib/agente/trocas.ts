@@ -64,7 +64,7 @@ const resumo = (a: Alimento) => ({
 const palavras = (texto: string) => texto.split(/[^a-z0-9]+/).filter(Boolean);
 const igual = (p: string, t: string) => p === t || p === t + 's' || t === p + 's';
 
-export function buscarAlimento(consulta: unknown) {
+export function buscarAlimento(consulta: unknown, filtro?: (a: Alimento) => boolean) {
   const termos = palavras(sem(String(consulta ?? ''))).filter((t) => !PALAVRAS_VAZIAS.has(t));
   if (termos.length === 0) return { ok: false, erro: 'Informe o nome do alimento.' };
   const ordenar = (x: { a: Alimento }, y: { a: Alimento }) =>
@@ -76,7 +76,7 @@ export function buscarAlimento(consulta: unknown) {
   if (achados.length === 0) {
     achados = BUSCA.filter(({ ws }) => termos.every((t) => t.length >= 4 && ws.some((p) => p.startsWith(t)))).sort(ordenar);
   }
-  const opcoes = achados.slice(0, 8).map(({ a }) => resumo(a));
+  const opcoes = achados.filter(({ a }) => !filtro || filtro(a)).slice(0, 8).map(({ a }) => resumo(a));
   if (opcoes.length === 0) return { ok: false, erro: 'Alimento não encontrado nas tabelas. Não estime: oriente a consultar a tabela de trocas do plano ou falar com a clínica.' };
   return { ok: true, opcoes };
 }
@@ -89,7 +89,12 @@ const tabela = (a: Alimento) => (a.id.startsWith('c:') ? 'clinica' : 'taco');
 const funcao = (a: Alimento): 'prot' | 'carb' | 'outro' =>
   (a.prot ?? 0) >= 15 && (a.carb ?? 0) < 5 ? 'prot' : (a.carb ?? 0) >= 10 && (a.prot ?? 0) < 15 ? 'carb' : 'outro';
 
-export function trocarAlimento(idOrigem: unknown, quantidade: unknown, idDestino: unknown, criterio?: unknown) {
+export type ResultadoTroca =
+  | { ok: true; de: { nome: string; gramas: number }; para: { nome: string; gramas_exatas: number; gramas_arredondadas_5g: number };
+      criterio: string; conta: string; fontes: string[]; avisos: string[] }
+  | { ok: false; erro: string };
+
+export function trocarAlimento(idOrigem: unknown, quantidade: unknown, idDestino: unknown, criterio?: unknown): ResultadoTroca {
   const o = POR_ID.get(String(idOrigem));
   const d = POR_ID.get(String(idDestino));
   const q = Number(quantidade);
@@ -140,6 +145,34 @@ export function trocarAlimento(idOrigem: unknown, quantidade: unknown, idDestino
     fontes: Array.from(new Set([o.fonte, d.fonte])),
     avisos,
   };
+}
+
+// ---------- Apoio ao "Meu plano" (o paciente troca itens do próprio plano) ----------
+const dados = (a: Alimento) => ({ id: a.id, nome: a.nome, tabela: tabela(a), kcal: a.kcal, carb: a.carb, prot: a.prot });
+
+/** Dados básicos de um alimento pelo id (ou null se não existir). */
+export function alimentoPorId(id: unknown) {
+  const a = POR_ID.get(String(id));
+  return a ? dados(a) : null;
+}
+
+/** Opções definidas pela clínica para trocar: proteína por proteína, carboidrato por carboidrato. */
+export function opcoesDaClinica(idOrigem: unknown) {
+  const o = POR_ID.get(String(idOrigem));
+  if (!o) return [];
+  const f = funcao(o);
+  if (f === 'outro') return [];
+  return CLINICA.filter((a) => a.id !== o.id && funcao(a) === f && a.clinica?.tipo === (f === 'prot' ? 'prot' : 'carb')).map(dados);
+}
+
+/** Busca por nome entre alimentos da mesma função do original (para "Ver outras opções"). */
+export function buscarMesmaFuncao(idOrigem: unknown, consulta: unknown) {
+  const o = POR_ID.get(String(idOrigem));
+  if (!o) return [];
+  const f = funcao(o);
+  const r = buscarAlimento(consulta, (a) => a.id !== o.id && funcao(a) === f);
+  if (!r.ok || !r.opcoes) return [];
+  return r.opcoes.map((x) => dados(POR_ID.get(x.id)!));
 }
 
 export const FERRAMENTAS = [

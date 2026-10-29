@@ -6,6 +6,7 @@ export const dynamic = 'force-dynamic';
 
 const ITENS = [
   { href: '/paciente', label: 'Feed', exact: true, icone: 'feed' as const },
+  { href: '/paciente/plano', label: 'Plano', icone: 'plano' as const },
   { href: '/paciente/checkin', label: 'Check-in', icone: 'checkin' as const },
   { href: '/paciente/documentos', label: 'Documentos', icone: 'documentos' as const },
   { href: '/paciente/duvidas', label: 'Dúvidas', icone: 'duvidas' as const },
