@@ -1,5 +1,5 @@
 import { createClient } from '@/lib/supabase/server';
-import { TrocaItem } from '@/components/paciente/TrocaItem';
+import { ItemPlano } from '@/components/paciente/TrocaItem';
 
 export const dynamic = 'force-dynamic';
 
@@ -43,14 +43,8 @@ export default async function MeuPlano() {
           <ul className="mt-2 divide-y divide-white/60">
             {r.itens.map((i) => (
               <li key={i.id} className="py-3">
-                <div className="flex items-center justify-between gap-3">
-                  <span className="min-w-0 text-sm">
-                    {i.nome}
-                    {i.quantidade_g != null && <span className="ml-2 font-medium">{i.quantidade_g.toLocaleString('pt-BR')} g</span>}
-                    {i.medida && <span className="ml-1 text-ash">({i.medida})</span>}
-                  </span>
-                  {i.alimento_id && i.quantidade_g != null && <span className="shrink-0"><TrocaItem itemId={i.id} nome={i.nome} gramas={i.quantidade_g} /></span>}
-                </div>
+                <ItemPlano itemId={i.id} nome={i.nome} gramas={i.quantidade_g} medida={i.medida}
+                  trocavel={!!i.alimento_id && i.quantidade_g != null} />
               </li>
             ))}
           </ul>

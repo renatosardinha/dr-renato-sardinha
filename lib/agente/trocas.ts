@@ -87,7 +87,7 @@ const estado = (nome: string) => (/\bcru|crua\b/.test(sem(nome)) ? 'cru' : 'prep
 const primeira = (nome: string) => sem(nome).split(/[^a-z0-9]+/)[0];
 const tabela = (a: Alimento) => (a.id.startsWith('c:') ? 'clinica' : 'taco');
 const funcao = (a: Alimento): 'prot' | 'carb' | 'outro' =>
-  (a.prot ?? 0) >= 15 && (a.carb ?? 0) < 5 ? 'prot' : (a.carb ?? 0) >= 10 && (a.prot ?? 0) < 15 ? 'carb' : 'outro';
+  (a.prot ?? 0) >= 12 && (a.carb ?? 0) < 5 ? 'prot' : (a.carb ?? 0) >= 10 && (a.prot ?? 0) < 15 ? 'carb' : 'outro';
 
 export type ResultadoTroca =
   | { ok: true; de: { nome: string; gramas: number }; para: { nome: string; gramas_exatas: number; gramas_arredondadas_5g: number };
@@ -176,13 +176,26 @@ export function alimentoPorId(id: unknown) {
   return a ? dados(a) : null;
 }
 
-/** Opções definidas pela clínica para trocar: proteína por proteína, carboidrato por carboidrato. */
+// Sugestões curtas e comuns, para o paciente não ver uma lista enorme.
+const NOMES_COMUNS: Record<'fruta' | 'cereal' | 'proteina', string[]> = {
+  fruta: ['Banana, prata, crua', 'Maçã, Fuji, com casca, crua', 'Mamão, Papaia, cru', 'Laranja, baía, crua', 'Uva, Itália, crua', 'Manga, Tommy Atkins, crua'],
+  cereal: ['Pão, trigo, francês', 'Pão, trigo, forma, integral', 'Tapioca, com manteiga', 'Cuscuz, de milho, cozido com sal', 'Aveia, flocos, crua'],
+  proteina: ['Ovo, de galinha, inteiro, cozido/10minutos', 'Queijo, minas, frescal'],
+};
+const POR_NOME = new Map(BASE.map((a) => [sem(a.nome), a]));
+const comuns = (t: keyof typeof NOMES_COMUNS) => NOMES_COMUNS[t].map((n) => POR_NOME.get(sem(n))).filter((a): a is Alimento => !!a);
+
+/** Até 6 opções prontas para trocar: as da clínica primeiro; para frutas, pães e proteínas, uma lista curta e comum. */
 export function opcoesDaClinica(idOrigem: unknown) {
   const o = POR_ID.get(String(idOrigem));
   if (!o) return [];
   const f = funcao(o);
-  if (f === 'outro') return [];
-  return CLINICA.filter((a) => a.id !== o.id && funcao(a) === f && a.clinica?.tipo === (f === 'prot' ? 'prot' : 'carb')).map(dados);
+  let lista: Alimento[] = [];
+  if (f === 'prot') lista = [...CLINICA.filter((a) => a.clinica?.tipo === 'prot'), ...comuns('proteina')];
+  else if (o.id.startsWith('c:')) lista = CLINICA.filter((a) => a.clinica?.tipo === 'carb');
+  else if (o.grupo === 'Frutas e derivados') lista = comuns('fruta');
+  else if (o.grupo === 'Cereais e derivados' || o.grupo === 'Alimentos preparados') lista = comuns('cereal');
+  return lista.filter((a) => a.id !== o.id).slice(0, 6).map(dados);
 }
 
 /** Busca por nome entre alimentos da mesma função do original (para "Ver outras opções"). */
@@ -192,7 +205,7 @@ export function buscarMesmaFuncao(idOrigem: unknown, consulta: unknown) {
   const f = funcao(o);
   const r = buscarAlimento(consulta, (a) => a.id !== o.id && funcao(a) === f);
   if (!r.ok || !r.opcoes) return [];
-  return r.opcoes.map((x) => dados(POR_ID.get(x.id)!));
+  return r.opcoes.slice(0, 6).map((x) => dados(POR_ID.get(x.id)!));
 }
 
 export const FERRAMENTAS = [
