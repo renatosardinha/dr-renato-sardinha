@@ -62,7 +62,7 @@ export function Chat() {
 
   return (
     <div className="mt-4">
-      <p className="rounded-lg border border-mist bg-sand px-4 py-3 text-sm text-graphite">
+      <p className="cartao-vidro rounded-[18px] px-4 py-3 text-sm text-graphite">
         Este assistente tira dúvidas gerais com base nos materiais da clínica. <strong>Não substitui a consulta</strong> e não
         vê os seus dados. Para sintomas, doses ou urgências, fale com a clínica. As conversas ficam registradas, visíveis só
         para você e para a clínica, e são apagadas após 90 dias.
@@ -73,7 +73,7 @@ export function Chat() {
         {msgs.map((m, i) => (
           <div key={i} className={m.role === 'user' ? 'flex justify-end' : 'flex justify-start'}>
             <p className={`max-w-[85%] whitespace-pre-line rounded-[18px] px-4 py-3 text-[15px] leading-relaxed ${
-              m.role === 'user' ? 'bg-ink text-ivory' : 'border border-mist bg-ivory text-graphite'}`}>{m.role === 'assistant' ? formatar(m.content) : m.content}</p>
+              m.role === 'user' ? 'bg-ink text-ivory' : 'cartao-vidro text-graphite'}`}>{m.role === 'assistant' ? formatar(m.content) : m.content}</p>
           </div>
         ))}
         {enviando && <p className="text-sm text-ash">Digitando…</p>}
@@ -81,11 +81,12 @@ export function Chat() {
         <div ref={fim} />
       </div>
 
-      <form onSubmit={enviar} className="sticky bottom-4 mt-4 flex gap-2">
+      <form onSubmit={enviar} className="vidro sticky bottom-4 mt-4 flex items-center gap-2 rounded-full p-1.5 pl-5">
         <input value={texto} onChange={(e) => setTexto(e.target.value)} maxLength={1000} placeholder="Escreva sua dúvida"
-          className="min-w-0 flex-1 rounded-full border border-mist bg-ivory px-4 py-3 text-base outline-none focus:border-terracotta-deep" />
+          aria-label="Escreva sua dúvida"
+          className="min-w-0 flex-1 bg-transparent py-2 text-base outline-none" />
         <button disabled={enviando || !texto.trim()} aria-label="Enviar"
-          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-ink text-ivory disabled:opacity-40">
+          className="grad-teal flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-white shadow-[0_6px_16px_rgba(21,122,116,0.4)] disabled:opacity-40">
           <Send className="h-5 w-5" />
         </button>
       </form>

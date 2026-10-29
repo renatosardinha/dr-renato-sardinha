@@ -212,3 +212,81 @@
 .prose-editorial ul, .prose-editorial ol { margin-bottom: 1.5rem; padding-left: 1.5rem; }
 .prose-editorial li { margin-bottom: 0.5rem; }
 .prose-editorial strong { color: var(--color-ink); font-weight: 500; }
+/* =========================================================
+   TEMA "VIDRO" — área do paciente e painel da clínica
+   Fundo em degradê colorido, cartões translúcidos e acento terracota/verde-água.
+   O desfoque (blur) fica só em barras e cartões grandes, para não pesar no celular.
+   ========================================================= */
+.tema-vidro {
+  position: relative;
+  isolation: isolate;
+  color: #1E2B2A;
+  background: linear-gradient(165deg, #FFE3D1 0%, #FFD0BB 28%, #CDEBE5 68%, #A5D9D4 100%);
+}
+.tema-vidro::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(255,154,107,0.75) 0, rgba(255,154,107,0) 42%),
+    radial-gradient(circle at 100% 45%, rgba(47,181,170,0.55) 0, rgba(47,181,170,0) 45%),
+    radial-gradient(circle at 10% 100%, rgba(255,200,87,0.6) 0, rgba(255,200,87,0) 42%);
+}
+
+/* Vidro com desfoque (barras, abas, cartões grandes) */
+.vidro {
+  background: rgba(255,255,255,0.46);
+  -webkit-backdrop-filter: blur(18px) saturate(170%);
+  backdrop-filter: blur(18px) saturate(170%);
+  border: 1px solid rgba(255,255,255,0.78);
+  box-shadow: 0 8px 28px rgba(120,60,40,0.12), inset 0 1px 0 rgba(255,255,255,0.9);
+}
+/* Vidro leve, sem desfoque (itens de lista) */
+.cartao-vidro {
+  background: rgba(255,255,255,0.5);
+  border: 1px solid rgba(255,255,255,0.78);
+  box-shadow: 0 6px 20px rgba(120,60,40,0.09), inset 0 1px 0 rgba(255,255,255,0.9);
+}
+.aba-ativa {
+  color: #FFFFFF;
+  background: linear-gradient(145deg, #C4431F, #D9622B);
+  box-shadow: 0 6px 16px rgba(196,67,31,0.36), inset 0 1px 0 rgba(255,255,255,0.45);
+}
+.grad-coral { background: linear-gradient(145deg, #C4431F, #F0884F); }
+.grad-teal  { background: linear-gradient(145deg, #157A74, #3BC1B3); }
+.grad-ambar { background: linear-gradient(145deg, #B8730A, #F2B233); }
+.grad-roxo  { background: linear-gradient(145deg, #6B3FA0, #B07BE0); }
+
+/* Ajustes automáticos nas telas que já existiam */
+.tema-vidro .bg-bone { background: transparent; }
+.tema-vidro .bg-ivory {
+  background: rgba(255,255,255,0.5);
+}
+.tema-vidro .bg-ivory.border,
+.tema-vidro .bg-ivory.border-y {
+  box-shadow: 0 6px 20px rgba(120,60,40,0.09), inset 0 1px 0 rgba(255,255,255,0.9);
+}
+.tema-vidro .bg-sand { background: rgba(255,255,255,0.4); }
+.tema-vidro .hover\:bg-sand:hover,
+.tema-vidro .active\:bg-sand:active { background: rgba(255,255,255,0.7); }
+.tema-vidro .border-mist,
+.tema-vidro .border-y.border-mist { border-color: rgba(255,255,255,0.8); }
+.tema-vidro .divide-mist > :not([hidden]) ~ :not([hidden]) { border-color: rgba(30,43,42,0.09); }
+.tema-vidro .bg-ink {
+  background: linear-gradient(145deg, #C4431F, #D9622B);
+  box-shadow: 0 6px 16px rgba(196,67,31,0.30), inset 0 1px 0 rgba(255,255,255,0.4);
+}
+.tema-vidro .bg-terracotta-deep { background: #C4431F; }
+.tema-vidro .text-ash { color: #4B5A58; }
+.tema-vidro .text-graphite { color: #2C3B39; }
+.tema-vidro .text-terracotta,
+.tema-vidro .text-terracotta-deep { color: #C4431F; }
+.tema-vidro .border-terracotta-deep { border-color: #C4431F; }
+.tema-vidro .hover\:bg-terracotta-deep:hover { background: #C4431F; color: #FFFFFF; }
+.tema-vidro .stroke-ink { stroke: #1E2B2A; }
+.tema-vidro .stroke-ash { stroke: #4B5A58; }
+.tema-vidro .fill-ash { fill: #4B5A58; }
+.tema-vidro input:focus, .tema-vidro select:focus, .tema-vidro textarea:focus { border-color: #157A74; }
+.tema-vidro *:focus-visible { outline-color: #157A74; }

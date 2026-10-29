@@ -19,8 +19,8 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   if (!isAdmin) redirect('/paciente');
 
   return (
-    <div className="mx-auto max-w-5xl gap-8 px-6 py-8 md:flex">
-      <aside className="mb-6 md:mb-0 md:w-52 md:shrink-0">
+    <div className="mx-auto max-w-6xl gap-6 px-4 py-6 md:flex md:px-6 md:py-8">
+      <aside className="vidro mb-5 rounded-[28px] p-4 md:sticky md:top-8 md:mb-0 md:w-56 md:shrink-0 md:self-start">
         <p className="text-eyebrow uppercase tracking-editorial text-terracotta">Clínica RS</p>
         <p className="mb-4 font-display text-lg">Painel</p>
         <SideNav items={ITENS} />

@@ -16,7 +16,7 @@ export function SideNav({ items }: { items: NavItem[] }) {
     <nav className="flex gap-1 overflow-x-auto md:flex-col md:overflow-visible" aria-label="Menu do painel">
       {items.map((i) => (
         <Link key={i.href} href={i.href} aria-current={ativo(pathname, i) ? 'page' : undefined}
-          className={`whitespace-nowrap px-3 py-2 text-sm ${ativo(pathname, i) ? 'bg-ink text-ivory' : 'text-graphite hover:bg-sand'}`}>
+          className={`flex min-h-[44px] items-center whitespace-nowrap rounded-2xl px-4 py-2 text-sm font-medium ${ativo(pathname, i) ? 'aba-ativa' : 'text-graphite hover:bg-sand'}`}>
           {i.label}
         </Link>
       ))}
@@ -34,37 +34,37 @@ export function PacienteTabs({ items }: { items: PacienteItem[] }) {
   const pathname = usePathname();
   return (
     <>
-      <nav className="fixed inset-y-0 left-0 z-20 hidden w-20 flex-col items-center gap-2 border-r border-mist bg-ivory py-4 md:flex" aria-label="Menu">
+      <nav className="vidro fixed inset-y-0 left-0 z-20 hidden w-20 flex-col items-center gap-2 rounded-none border-y-0 border-l-0 py-4 md:flex" aria-label="Menu">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/logo-mark.svg" alt="Clínica RS" className="mb-4 h-10 w-10 rounded-full border border-mist p-0.5" />
+        <img src="/images/logo-mark.svg" alt="Clínica RS" className="mb-4 h-10 w-10 rounded-full border border-white/80 bg-white/60 p-0.5" />
         {items.map((i) => {
           const Icone = ICONES[i.icone];
           const on = ativo(pathname, i);
           return (
             <Link key={i.href} href={i.href} title={i.label} aria-label={i.label} aria-current={on ? 'page' : undefined}
               className="relative flex h-12 w-full items-center justify-center">
-              {on && <span className="absolute left-0 h-8 w-1 bg-ink" />}
-              <span className={`flex h-11 w-11 items-center justify-center rounded-full ${on ? 'bg-sand' : 'hover:bg-sand'}`}>
-                <Icone strokeWidth={1.5} className="h-6 w-6 stroke-ink" />
+              <span className={`flex h-11 w-11 items-center justify-center rounded-2xl ${on ? 'aba-ativa' : 'hover:bg-sand'}`}>
+                <Icone strokeWidth={1.7} className={`h-6 w-6 ${on ? 'stroke-white' : 'stroke-ink'}`} />
               </span>
             </Link>
           );
         })}
       </nav>
-      <nav className="sticky top-14 z-10 flex border-b border-mist bg-ivory md:hidden" aria-label="Menu">
-        {items.map((i) => {
-          const Icone = ICONES[i.icone];
-          const on = ativo(pathname, i);
-          return (
-            <Link key={i.href} href={i.href} aria-current={on ? 'page' : undefined}
-              className={`relative flex min-h-[52px] flex-1 flex-col items-center justify-center gap-0.5 text-xs ${on ? 'font-semibold text-ink' : 'text-ash'}`}>
-              <Icone strokeWidth={on ? 1.8 : 1.5} className={`h-5 w-5 ${on ? 'stroke-ink' : 'stroke-ash'}`} />
-              {i.label}
-              {on && <span className="absolute inset-x-4 bottom-0 h-0.5 bg-ink" />}
-            </Link>
-          );
-        })}
-      </nav>
+      <div className="sticky top-14 z-10 px-3 pt-3 md:hidden">
+        <nav className="vidro flex gap-1 rounded-[22px] p-1" aria-label="Menu">
+          {items.map((i) => {
+            const Icone = ICONES[i.icone];
+            const on = ativo(pathname, i);
+            return (
+              <Link key={i.href} href={i.href} aria-current={on ? 'page' : undefined}
+                className={`flex min-h-[48px] flex-1 flex-col items-center justify-center gap-0.5 rounded-[17px] text-[11px] font-medium ${on ? 'aba-ativa' : 'text-graphite'}`}>
+                <Icone strokeWidth={on ? 1.9 : 1.6} className={`h-[18px] w-[18px] ${on ? 'stroke-white' : 'stroke-ink'}`} />
+                {i.label}
+              </Link>
+            );
+          })}
+        </nav>
+      </div>
     </>
   );
 }
