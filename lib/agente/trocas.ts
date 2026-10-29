@@ -20,6 +20,7 @@ type Alimento = {
   carb: number | null;
   fonte: string;
   clinica?: { tipo: 'prot'; kcal: number } | { tipo: 'carb'; fator: number };
+  suplemento?: boolean;   // produto de rótulo (a troca é feita pela proteína)
 };
 
 const FONTE_CLINICA = 'padrão da clínica (TBCA)';
@@ -32,6 +33,9 @@ const CLINICA: Alimento[] = [
   { id: 'c:tilapia', nome: 'Filé de tilápia grelhado', grupo: 'Proteína', kcal: 128, prot: 26.1, lip: 2.7, carb: 0, fonte: FONTE_CLINICA, clinica: { tipo: 'prot', kcal: 128 } },
   { id: 'c:file-bovino', nome: 'Filé mignon bovino grelhado', grupo: 'Proteína', kcal: 220, prot: 32.8, lip: 9.1, carb: 0, fonte: FONTE_CLINICA, clinica: { tipo: 'prot', kcal: 220 } },
   { id: 'c:suino', nome: 'Lombo ou filé mignon suíno grelhado', grupo: 'Proteína', kcal: 210, prot: 35.7, lip: 6.6, carb: 0, fonte: FONTE_CLINICA, clinica: { tipo: 'prot', kcal: 210 } },
+  // Whey: valor médio de rótulo informado pela clínica (30 g = 24 g de proteína e cerca de 135 kcal). Varia por marca.
+  { id: 'c:whey', nome: 'Whey protein', grupo: 'Suplemento', kcal: 450, prot: 80, lip: null, carb: null,
+    fonte: 'padrão da clínica (rótulo médio: 30 g = 24 g de proteína e cerca de 135 kcal; varia por marca)', clinica: { tipo: 'prot', kcal: 450 }, suplemento: true },
   { id: 'c:arroz', nome: 'Arroz branco cozido', grupo: 'Carboidrato', kcal: ARROZ_KCAL, prot: 2.5, lip: 0.2, carb: ARROZ_CARB, fonte: FONTE_CLINICA, clinica: { tipo: 'carb', fator: 1 } },
   ...([
     ['c:batata-inglesa', 'Batata inglesa cozida', 2.24],
@@ -110,7 +114,13 @@ export function trocarAlimento(idOrigem: unknown, quantidade: unknown, idDestino
   let conta: string;
   let usado: string;
 
-  if (o.clinica && d.clinica && o.clinica.tipo === 'prot' && d.clinica.tipo === 'prot') {
+  if (criterio === 'proteina' || o.suplemento || d.suplemento) {
+    if (!o.prot || !d.prot) return { ok: false, erro: 'Um dos alimentos não tem proteína informada na tabela. Não estime: oriente a falar com a clínica.' };
+    exato = (q * o.prot) / d.prot;
+    conta = `${fmt(q)} g x ${fmt(o.prot)} g de proteína / ${fmt(d.prot)} g de proteína (por 100 g)`;
+    usado = 'proteína';
+    if (o.suplemento || d.suplemento) avisos.push('O valor do whey é uma média de rótulo (30 g = 24 g de proteína). Se o seu produto for diferente, confira o rótulo.');
+  } else if (o.clinica && d.clinica && o.clinica.tipo === 'prot' && d.clinica.tipo === 'prot') {
     exato = (q * o.clinica.kcal) / d.clinica.kcal;
     conta = `${fmt(q)} g x ${o.clinica.kcal} kcal / ${d.clinica.kcal} kcal`;
     usado = 'calorias (padrão da clínica)';
@@ -191,7 +201,8 @@ export function opcoesDaClinica(idOrigem: unknown) {
   if (!o) return [];
   const f = funcao(o);
   let lista: Alimento[] = [];
-  if (f === 'prot') lista = [...CLINICA.filter((a) => a.clinica?.tipo === 'prot'), ...comuns('proteina')];
+  if (o.suplemento) lista = [POR_ID.get('c:frango')!, POR_NOME.get(sem('Atum, conserva em óleo'))!].filter(Boolean);
+  else if (f === 'prot') lista = [...CLINICA.filter((a) => a.clinica?.tipo === 'prot' && !a.suplemento), ...comuns('proteina')];
   else if (o.id.startsWith('c:')) lista = CLINICA.filter((a) => a.clinica?.tipo === 'carb');
   else if (o.grupo === 'Frutas e derivados') lista = comuns('fruta');
   else if (o.grupo === 'Cereais e derivados' || o.grupo === 'Alimentos preparados') lista = comuns('cereal');
@@ -223,7 +234,7 @@ export const FERRAMENTAS = [
         id_origem: { type: 'string', description: 'id do alimento que o plano manda (de buscar_alimento).' },
         quantidade_g: { type: 'number', description: 'Quantidade do alimento original, em gramas.' },
         id_destino: { type: 'string', description: 'id do alimento que o paciente quer comer.' },
-        criterio: { type: 'string', enum: ['carboidrato', 'calorias'], description: 'Opcional. Carboidrato para frutas, pães e cereais; calorias para proteínas.' },
+        criterio: { type: 'string', enum: ['carboidrato', 'calorias', 'proteina'], description: 'Opcional. Carboidrato para frutas, pães e cereais; calorias para proteínas. Whey e outros suplementos de proteína são sempre trocados por proteína.' },
       },
       required: ['id_origem', 'quantidade_g', 'id_destino'],
     },
