@@ -3,7 +3,7 @@ import { TrocaItem } from '@/components/paciente/TrocaItem';
 
 export const dynamic = 'force-dynamic';
 
-type Item = { id: string; refeicao: string; nome: string; alimento_id: string | null; quantidade_g: number | null; created_at: string };
+type Item = { id: string; refeicao: string; nome: string; alimento_id: string | null; quantidade_g: number | null; medida: string | null; created_at: string };
 
 export default async function MeuPlano() {
   const supabase = createClient();
@@ -12,7 +12,7 @@ export default async function MeuPlano() {
     return <p className="cartao-vidro rounded-[22px] p-5 text-graphite">O plano é para pacientes. Entre com a conta de um paciente para testar.</p>;
   }
   const { data } = await supabase.from('plan_items')
-    .select('id, refeicao, nome, alimento_id, quantidade_g, created_at').eq('patient_id', pid).order('ordem');
+    .select('id, refeicao, nome, alimento_id, quantidade_g, medida, created_at').eq('patient_id', pid).order('ordem');
   const itens = ((data ?? []) as Item[]).map((i) => ({ ...i, quantidade_g: i.quantidade_g == null ? null : Number(i.quantidade_g) }));
 
   if (itens.length === 0) {
@@ -47,6 +47,7 @@ export default async function MeuPlano() {
                   <span className="min-w-0 text-sm">
                     {i.nome}
                     {i.quantidade_g != null && <span className="ml-2 font-medium">{i.quantidade_g.toLocaleString('pt-BR')} g</span>}
+                    {i.medida && <span className="ml-1 text-ash">({i.medida})</span>}
                   </span>
                   {i.alimento_id && i.quantidade_g != null && <span className="shrink-0"><TrocaItem itemId={i.id} nome={i.nome} gramas={i.quantidade_g} /></span>}
                 </div>
