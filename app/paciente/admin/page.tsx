@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
 import { curva } from '@/lib/grafico';
+import { alertasCheckin, diasAtras, type LinhaCheckin } from '@/lib/checkin';
 import { Users, Activity, MessageCircle, FileText, type LucideIcon } from 'lucide-react';
 
 export const dynamic = 'force-dynamic';
@@ -15,7 +16,7 @@ export default async function VisaoGeral() {
   const desde30 = new Date(Date.now() - 30 * 86400000).toISOString();
   const desde14 = new Date(Date.now() - 14 * 86400000).toISOString();
 
-  const [uso, serie, perguntas, perguntas30, urgentes30, novosCount, envios, inativos, metricas, posts] = await Promise.all([
+  const [uso, serie, perguntas, perguntas30, urgentes30, novosCount, envios, inativos, metricas, posts, checkins] = await Promise.all([
     supabase.rpc('painel_uso'),
     supabase.rpc('uso_por_dia', { p_dias: 14 }),
     supabase.from('agent_messages').select('created_at').gte('created_at', desde14).limit(3000),
@@ -26,6 +27,7 @@ export default async function VisaoGeral() {
     supabase.rpc('pacientes_inativos', { p_dias: 30 }),
     supabase.rpc('metricas_posts'),
     supabase.from('posts').select('id, titulo').eq('publicado', true),
+    supabase.from('checkins').select('patient_id, semana, humor, sono, energia, saciedade, plano, aerobico, forca').gte('semana', diasAtras(27)).limit(3000),
   ]);
 
   const r = ((uso.data ?? [])[0] ?? {}) as { total_ativos?: number; ativos_7d?: number; ativos_30d?: number; nunca_acessaram?: number };
@@ -70,8 +72,12 @@ export default async function VisaoGeral() {
   const p = curva(duvidasSerie, W, H, 24, maxGraf);
   const ult = a.pts[a.pts.length - 1];
 
+  const alertasCk = alertasCheckin((checkins.data ?? []) as LinhaCheckin[]);
+  const ckGraves = alertasCk.filter((c) => c.humorGrave).length;
+
   const alertas: { t: string; d: string; cor: string; href: string }[] = [];
   if (urg) alertas.push({ t: `${urg} pergunta(s) com alerta de urgência`, d: 'O assistente respondeu com orientação fixa. Vale revisar.', cor: '#C4431F', href: '/paciente/admin/duvidas' });
+  if (alertasCk.length) alertas.push({ t: `${alertasCk.length} paciente(s) com nota crítica no check-in`, d: ckGraves ? `${ckGraves} com humor muito baixo. Vale olhar primeiro.` : 'Notas abaixo de 5 ou sem treino há 2 semanas.', cor: ckGraves ? '#C4431F' : '#B8730A', href: '/paciente/admin/checkins' });
   if (nInativos) alertas.push({ t: `${nInativos} paciente(s) sem acesso há 30 dias`, d: 'Podem precisar de um lembrete.', cor: '#B8730A', href: '/paciente/admin/uso' });
   if (r.nunca_acessaram) alertas.push({ t: `${r.nunca_acessaram} paciente(s) nunca acessaram`, d: 'Cadastro feito, mas sem primeiro acesso.', cor: '#6B3FA0', href: '/paciente/admin/uso' });
 
