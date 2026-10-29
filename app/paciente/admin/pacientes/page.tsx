@@ -12,6 +12,9 @@ export default async function Pacientes({ searchParams }: { searchParams: { q?: 
   let query = supabase.from('patients').select('id, nome, email, celular, ativo').order('nome');
   if (q) query = query.or(`nome.ilike.%${q}%,email.ilike.%${q}%`);
   const { data: pacientes } = await query;
+  const { data: novos } = await supabase.from('patient_uploads').select('patient_id').is('visto_em', null);
+  const novosPor = new Map<string, number>();
+  (novos ?? []).forEach((n) => novosPor.set(n.patient_id, (novosPor.get(n.patient_id) ?? 0) + 1));
 
   return (
     <section>
@@ -45,7 +48,14 @@ export default async function Pacientes({ searchParams }: { searchParams: { q?: 
           <li key={p.id}>
             <Link href={`/paciente/admin/pacientes/${p.id}`} className="flex items-center justify-between gap-4 py-3 hover:bg-sand/50">
               <span>
-                <span className="block">{p.nome}</span>
+                <span className="block">
+                  {p.nome}
+                  {novosPor.get(p.id) ? (
+                    <span className="ml-2 rounded-full bg-terracotta-deep px-2 py-0.5 text-xs font-semibold text-ivory">
+                      {novosPor.get(p.id)} {novosPor.get(p.id) === 1 ? 'arquivo novo' : 'arquivos novos'}
+                    </span>
+                  ) : null}
+                </span>
                 <span className="text-sm text-ash">{p.email}{p.celular ? ` · ${p.celular}` : ''}</span>
               </span>
               <span className="text-sm text-ash">{p.ativo ? 'Abrir →' : 'Inativo →'}</span>
