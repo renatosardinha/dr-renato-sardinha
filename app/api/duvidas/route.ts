@@ -63,6 +63,7 @@ export async function POST(req: Request) {
   // Conversa enviada ao modelo. O modelo pode pedir a calculadora de trocas (até 4 vezes) antes de responder.
   const conversa: { role: string; content: unknown }[] = [...historico, { role: 'user', content: mensagem }];
   let blocos: Bloco[] = [];
+  let parou = '';
   for (let volta = 0; volta < 5; volta++) {
     const ultima = volta === 4;
     let resp: Response;
@@ -76,7 +77,7 @@ export async function POST(req: Request) {
         },
         body: JSON.stringify({
           model: MODELO,
-          max_tokens: 700,
+          max_tokens: 1200,
           system: [{ type: 'text', text: SISTEMA, cache_control: { type: 'ephemeral' } }],
           tools: FERRAMENTAS,
           ...(ultima ? { tool_choice: { type: 'none' } } : {}),
@@ -96,6 +97,7 @@ export async function POST(req: Request) {
     }
     const dados = await resp.json();
     blocos = (dados.content ?? []) as Bloco[];
+    parou = String(dados.stop_reason ?? '');
     if (dados.stop_reason !== 'tool_use' || ultima) break;
     conversa.push({ role: 'assistant', content: blocos });
     conversa.push({
@@ -106,7 +108,15 @@ export async function POST(req: Request) {
     });
   }
 
-  const resposta: string = blocos.filter((c) => c.type === 'text').map((c) => c.text ?? '').join('\n').trim();
+  let resposta: string = blocos.filter((c) => c.type === 'text').map((c) => c.text ?? '').join('\n').trim();
+  // Se a resposta bateu no limite de tamanho, corta na última frase completa em vez de terminar no meio de uma palavra.
+  if (parou === 'max_tokens') {
+    const fins = Array.from(resposta.matchAll(/[.!?](\s|$)/g));
+    const ult = fins[fins.length - 1];
+    if (ult && ult.index !== undefined && ult.index > resposta.length * 0.5) {
+      resposta = `${resposta.slice(0, ult.index + 1)}\n\nSe precisar de mais detalhes, pergunte de novo ou fale com a clínica.`;
+    }
+  }
   if (!resposta) return NextResponse.json({ erro: 'Não consegui responder agora. Fale com a clínica.' }, { status: 502 });
 
   await salvar(resposta, false);
