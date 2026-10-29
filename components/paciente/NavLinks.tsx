@@ -24,9 +24,9 @@ export function SideNav({ items }: { items: NavItem[] }) {
   );
 }
 
-import { Home, FileText, MessageCircleQuestion, Store, ClipboardCheck, type LucideIcon } from 'lucide-react';
+import { Home, FileText, MessageCircleQuestion, Store, ClipboardCheck, Utensils, type LucideIcon } from 'lucide-react';
 
-const ICONES: Record<string, LucideIcon> = { feed: Home, documentos: FileText, duvidas: MessageCircleQuestion, indicacoes: Store, checkin: ClipboardCheck };
+const ICONES: Record<string, LucideIcon> = { feed: Home, documentos: FileText, duvidas: MessageCircleQuestion, indicacoes: Store, checkin: ClipboardCheck, plano: Utensils };
 export type PacienteItem = NavItem & { icone: keyof typeof ICONES };
 
 /** Menu do paciente: faixa lateral só com ícones (computador) e abas fixas no topo, abaixo do cabeçalho (celular). */
@@ -51,13 +51,13 @@ export function PacienteTabs({ items }: { items: PacienteItem[] }) {
         })}
       </nav>
       <div className="sticky top-14 z-10 px-3 pt-3 md:hidden">
-        <nav className="vidro flex gap-1 rounded-[22px] p-1" aria-label="Menu">
+        <nav className="vidro flex gap-1 overflow-x-auto rounded-[22px] p-1" aria-label="Menu">
           {items.map((i) => {
             const Icone = ICONES[i.icone];
             const on = ativo(pathname, i);
             return (
               <Link key={i.href} href={i.href} aria-current={on ? 'page' : undefined}
-                className={`flex min-h-[48px] flex-1 flex-col items-center justify-center gap-0.5 rounded-[17px] text-[11px] font-medium ${on ? 'aba-ativa' : 'text-graphite'}`}>
+                className={`flex min-h-[48px] min-w-[62px] flex-1 flex-col items-center justify-center gap-0.5 rounded-[17px] text-[11px] font-medium ${on ? 'aba-ativa' : 'text-graphite'}`}>
                 <Icone strokeWidth={on ? 1.9 : 1.6} className={`h-[18px] w-[18px] ${on ? 'stroke-white' : 'stroke-ink'}`} />
                 {i.label}
               </Link>

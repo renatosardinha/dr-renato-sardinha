@@ -56,6 +56,10 @@ export default async function PacienteDetalhe({ params, searchParams }: {
         <button className={botao}>Salvar</button>
       </form>
 
+      <h2 className="mt-12 font-display text-xl">Plano alimentar</h2>
+      <p className="mt-3 text-sm text-graphite">Cadastre o plano para o paciente ver e trocar alimentos no app.</p>
+      <Link href={`/paciente/admin/pacientes/${p.id}/plano`} className={`${botao} mt-3 inline-block`}>Abrir plano alimentar</Link>
+
       <h2 className="mt-12 font-display text-xl">Enviados pelo paciente</h2>
       {(envios ?? []).length === 0 ? <p className="mt-3 text-ash">Nada enviado pelo paciente.</p> : (
         <ul className="mt-3 divide-y divide-mist border-y border-mist">
