@@ -25,8 +25,8 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         <p className="text-eyebrow uppercase tracking-editorial text-terracotta">Clínica RS</p>
         <p className="mb-4 font-display text-lg">Painel</p>
         <SideNav items={ITENS} />
-        <div className="mt-6 hidden flex-col gap-2 text-sm md:flex">
-          <Link href="/paciente" className="underline text-ash">Ver como paciente</Link>
+        <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm md:mt-6 md:flex-col md:items-start">
+          <Link href="/paciente" className="font-medium text-terracotta-deep underline">Voltar ao app do paciente</Link>
           <form action="/paciente/sair" method="post"><button className="underline text-ash">Sair</button></form>
         </div>
       </aside>
