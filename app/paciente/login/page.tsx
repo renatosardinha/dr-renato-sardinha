@@ -1,11 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 
 export default function LoginPage() {
-  const router = useRouter();
   const [email, setEmail] = useState('');
   const [codigo, setCodigo] = useState('');
   const [etapa, setEtapa] = useState<'email' | 'codigo'>('email');
@@ -44,8 +42,16 @@ export default function LoginPage() {
       setErro('Código inválido ou expirado. Tente novamente.');
       return;
     }
-    router.replace('/paciente');
-    router.refresh();
+    // Confere se o navegador guardou o login (alguns bloqueiam cookies, como abas privativas e navegadores
+    // de dentro de outros aplicativos). Sem isso a pessoa voltaria para esta tela sem entender o motivo.
+    const { data } = await supabase.auth.getSession();
+    const cookiesOk = typeof navigator !== 'undefined' && navigator.cookieEnabled && document.cookie.includes('sb-');
+    if (!data.session || !cookiesOk) {
+      setErro('O código está certo, mas este navegador não guardou o seu login. Abra o endereço direto no Safari ou no Chrome (fora do WhatsApp, Instagram ou e-mail), sem aba privativa, e tente de novo.');
+      return;
+    }
+    // Navegação completa: garante que o servidor já receba o login ao abrir o app.
+    window.location.assign('/paciente');
   }
 
   const input = 'w-full rounded-lg border border-mist bg-ivory px-4 py-3 text-base outline-none focus:border-terracotta-deep';
