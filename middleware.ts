@@ -21,8 +21,9 @@ export async function middleware(request: NextRequest) {
 
   const { data: { user } } = await supabase.auth.getUser();
   const isLogin = request.nextUrl.pathname.startsWith('/paciente/login');
+  const isAjuda = request.nextUrl.pathname.startsWith('/paciente/ajuda'); // tutorial público
 
-  if (!user && !isLogin) {
+  if (!user && !isLogin && !isAjuda) {
     return NextResponse.redirect(new URL('/paciente/login', request.url));
   }
   if (user && isLogin) {
