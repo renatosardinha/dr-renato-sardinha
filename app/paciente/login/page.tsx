@@ -88,6 +88,7 @@ export default function LoginPage() {
         </form>
       )}
       {erro && <p className="mt-4 text-sm text-terracotta" role="alert">{erro}</p>}
+      <a href="/paciente/ajuda" className="mt-8 text-center text-sm text-ash underline">Como entrar e colocar o app na tela inicial</a>
     </main>
   );
 }
