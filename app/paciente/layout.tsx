@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Área do paciente',
   robots: { index: false, follow: false },
-  icons: { apple: '/icons/icon-180.png' },
+  icons: { apple: '/icons/icon-v2-180.png' },
   appleWebApp: { capable: true, title: 'Clínica RS', statusBarStyle: 'default' },
 };
 
