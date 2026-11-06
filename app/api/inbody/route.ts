@@ -49,7 +49,8 @@ export async function POST(req: Request) {
   if (data === 'grande_demais') return NextResponse.json({ ok: false, erro: 'Envio grande demais.' }, { status: 413 });
 
   // ok = gravado no paciente; pendente = e-mail não encontrado (a clínica vincula no painel); duplicado = já recebido.
-  return NextResponse.json({ ok: true, status: data });
+  // Resposta com os marcadores de sucesso mais comuns, para o LookinBody não tratar como falha e reenviar.
+  return NextResponse.json({ ok: true, success: true, result: 'success', code: 200, status: data });
 }
 
 export function GET() {
